@@ -1,5 +1,7 @@
 package com.ca.bms.entity;
 
+import java.util.List;
+
 /**
  * 用户类
  * @author：刘志龙
@@ -16,6 +18,15 @@ public class User {
 	private String nickname;
 	private String phoneNum;
 	private int authNum;
+	private List<Sensor> sensorList;
+	
+	public List<Sensor> getSensorList() {
+		return sensorList;
+	}
+
+	public void setSensorList(List<Sensor> sensorList) {
+		this.sensorList = sensorList;
+	}
 
 	public Integer getId() {
 		return id;
