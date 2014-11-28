@@ -1,4 +1,4 @@
-package com.ca.bms.pojo;
+package com.ca.bms.entity;
 
 /**
  * 用户类
