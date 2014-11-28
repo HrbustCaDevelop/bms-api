@@ -60,12 +60,29 @@
 			<version>${spring.version}</version>
 		</dependency>
 
-		<!-- 其他依赖包 -->
+		<!-- fastjson依赖包 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.1.38</version>
+		</dependency>
+
 		<!-- druid核心包 -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
 			<version>0.2.13</version>
+		</dependency>
+		<!-- Spring JSON支持 -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.8.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.8.4</version>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
@@ -77,6 +94,7 @@
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.2.1</version>
 		</dependency>
+		<!-- MySQL驱动包 -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
