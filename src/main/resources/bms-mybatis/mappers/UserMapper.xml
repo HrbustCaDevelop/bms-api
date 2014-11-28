@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.ca.bms.dao.UserDao">
+	
+	<insert id="saveUserByUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO bms_user
+        	(
+        		CREATE_TIME,
+        		USERNAME,
+        		PASSWORD,
+        		NICKNAME,
+        		PHONE_NUM
+        	)
+        VALUES
+        	(
+	        	CURRENT_TIMESTAMP,
+	        	#{username, jdbcType=VARCHAR},
+	        	#{password, jdbcType=VARCHAR},
+	        	#{nickname, jdbcType=VARCHAR},
+	        	#{phoneNum, jdbcType=VARCHAR}
+        	)
+    </insert>
+
+	
+    <!-- <resultMap id="UserParamMap" type="User">
+        <id column="ROLE_ID" property="id" jdbcType="int"/>
+        <result column="ROLE_NAME" property="name" jdbcType="VARCHAR"/>
+        <collection column="DS_ID" property="dsList" select="RoleEntity.getDsIdsByUserId"/>
+    </resultMap>
+
+    <select id="count" resultType="Long">
+        SELECT
+        COUNT(1)
+        FROM DATABANK.TBL_DB_ROLE
+        WITH UR
+    </select>
+
+    <select id="get" parameterType="Long" resultMap="roleDetailMap">
+        SELECT
+        rd.DS_ID,r.*
+        FROM DATABANK.TBL_DB_ROLE r
+        INNER JOIN DATABANK.TBL_ROLE_DATASOURCE rd ON r.ROLE_ID = rd.ROLE_ID
+        WHERE r.ROLE_ID = #{id}
+        WITH UR
+    </select>
+
+    <select id="getRoleByUserId" parameterType="Long" resultMap="roleDetailMap">
+        SELECT
+        r.*
+        FROM DATABANK.TBL_DB_ROLE r, DATABANK.TBL_DB_USER_ROLE tr
+        WHERE r.ROLE_ID = tr.ROLE_ID AND tr.USER_ID = #{userId}
+        WITH UR
+    </select>
+
+    <select id="getRoleIdsByUserId" parameterType="Long" resultType="Long">
+        SELECT
+        ROLE_ID
+        FROM DATABANK.TBL_DB_USER_ROLE
+        WHERE TBL_DB_USER_ROLE.USER_ID = #{userId}
+        WITH UR
+    </select>
+
+    <select id="getDsIdsByUserId" parameterType="Long" resultType="Long">
+        SELECT
+        rd.DS_ID
+        FROM DATABANK.TBL_DB_USER_ROLE ur
+        INNER JOIN DATABANK.TBL_ROLE_DATASOURCE rd ON ur.ROLE_ID = rd.ROLE_ID
+        WHERE ur.USER_ID = #{userId}
+        WITH UR
+    </select>
+
+    获取组权限
+    <select id="getAll" resultMap="roleDetailMap">
+        SELECT
+        *
+        FROM DATABANK.TBL_DB_ROLE
+        WITH UR
+    </select>
+
+    <insert id="insert" parameterType="RoleEntity" useGeneratedKeys="true" keyProperty="id">
+        <selectKey keyProperty="id" resultType="long" order="BEFORE">
+            VALUES NEXTVAL FOR DATABANK.SEQ_ROLE
+        </selectKey>
+        INSERT INTO DATABANK.TBL_DB_ROLE (ROLE_ID, ROLE_NAME)
+        VALUES (#{id}, #{name, jdbcType=VARCHAR})
+    </insert>
+
+    <delete id="delete" parameterType="Long">
+        DELETE FROM DATABANK.TBL_DB_ROLE
+        WHERE ROLE_ID = #{id}
+    </delete>
+
+    <update id="update" parameterType="RoleEntity">
+        UPDATE DATABANK.TBL_DB_ROLE
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name !=''">
+                ROLE_NAME = #{name},
+            </if>
+        </trim>
+        WHERE ROLE_ID = #{id}
+    </update>
+
+    Role-DataSource 关系
+
+    <select id="getRoleDsR" parameterType="Long" resultType="Long">
+        SELECT
+        DS_ID
+        FROM DATABANK.TBL_ROLE_DATASOURCE
+        WHERE ROLE_ID = #{roleId}
+        WITH UR
+    </select>
+
+    <insert id="addRoleDsR" parameterType="map" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO DATABANK.TBL_ROLE_DATASOURCE (ROLE_ID, DS_ID) VALUES
+        <foreach item="dsId" index="index" collection="dsIds" separator=",">
+            (#{roleId}, #{dsId})
+        </foreach>
+    </insert>
+
+    <delete id="deleteRoleDsR" parameterType="map">
+        DELETE FROM DATABANK.TBL_ROLE_DATASOURCE
+        WHERE ROLE_ID = #{roleId}
+        <if test="dsIds != null">
+            AND DS_ID IN
+            <foreach item="dsId" index="index" collection="dsIds" separator="," open="(" close=")">
+                #{dsId}
+            </foreach>
+        </if>
+    </delete>
+
+    Allow
+
+    <select id="getAllowRoleIdAndDsId" parameterType="map" resultType="String">
+        SELECT
+        ALLOW
+        FROM DATABANK.TBL_ROLE_ALLOW
+        WHERE ROLE_ID = #{roleId} AND DS_ID = #{dsId}
+        WITH UR
+    </select>
+
+    <insert id="addAllow" parameterType="map" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO DATABANK.TBL_ROLE_ALLOW (ROLE_ID, DS_ID, ALLOW) VALUES
+        <foreach item="item" index="index" collection="allow" separator=",">
+            (#{roleId}, #{dsId}, #{item})
+        </foreach>
+    </insert>
+
+    <delete id="deleteAllow" parameterType="map">
+        DELETE FROM DATABANK.TBL_ROLE_ALLOW WHERE ROLE_ID = #{roleId} AND DS_ID = #{dsId}
+        <if test="allow != null">
+            and ALLOW in
+            <foreach item="item" index="index" collection="allow" separator="," open="(" close=")">
+                #{item}
+            </foreach>
+        </if>
+    </delete>
+
+    not Allow
+
+    <select id="getNotAllowRoleIdAndDsId" parameterType="map" resultType="String">
+        SELECT
+        NOT_ALLOW
+        FROM DATABANK.TBL_ROLE_NOTALLOW
+        WHERE ROLE_ID = #{roleId} AND DS_ID = #{dsId}
+        WITH UR
+    </select>
+
+    <insert id="addNotAllow" parameterType="map" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO DATABANK.TBL_ROLE_NOTALLOW (ROLE_ID, DS_ID, NOT_ALLOW) VALUES
+        <foreach item="item" index="index" collection="notAllow" separator=",">
+            (#{roleId}, #{dsId}, #{item})
+        </foreach>
+    </insert>
+
+    <delete id="deleteNotAllow" parameterType="map">
+        DELETE FROM DATABANK.TBL_ROLE_NOTALLOW WHERE ROLE_ID = #{roleId} AND DS_ID = #{dsId}
+        <if test="notAllow != null">
+            and NOT_ALLOW in
+            <foreach item="item" index="index" collection="notAllow" separator="," open="(" close=")">
+                #{item}
+            </foreach>
+        </if>
+    </delete> -->
+
+</mapper>
