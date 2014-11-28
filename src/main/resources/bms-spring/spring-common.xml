@@ -35,12 +35,12 @@
 		<property name="testOnReturn" value="false" />
 		<property name="filters" value="stat" />
 	</bean>
-
+	
 	<!-- MyBatis配置 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation" value="classpath:/bms-mybatis/Configuration.xml" />
-		<property name="mapperLocations" value="classpath*:/bms-mybatis/*Mapper.xml" />
+		<property name="configLocation" value="classpath:/bms-mybatis/mybatis-config.xml" />
+		<property name="mapperLocations" value="classpath*:/bms-mybatis/mappers/*Mapper.xml" />
 	</bean>
 
 	<!-- 指定要扫描的dao以便自动注入 -->

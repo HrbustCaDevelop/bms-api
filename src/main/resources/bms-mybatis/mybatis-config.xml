@@ -13,6 +13,6 @@
     </settings>
     
     <typeAliases>
-        <typeAlias type="com.ca.bms.entity.User"/>
+        <typeAlias type="com.ca.bms.entitys.User"/>
     </typeAliases>
 </configuration>
