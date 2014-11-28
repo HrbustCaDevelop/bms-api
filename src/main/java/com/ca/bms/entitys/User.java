@@ -1,5 +1,6 @@
-package com.ca.bms.entity;
+package com.ca.bms.entitys;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -8,7 +9,8 @@ import java.util.List;
  * @since：2014年11月28日 下午1:51:10
  * @version:1.0
  */
-public class User {
+public class User implements Serializable{
+	private static final long serialVersionUID = -751832958410532799L;
 	private Integer id;
 	private String createTime;
 	private String modifyTime;

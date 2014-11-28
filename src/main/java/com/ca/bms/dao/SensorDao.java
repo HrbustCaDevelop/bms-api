@@ -1,6 +1,6 @@
 package com.ca.bms.dao;
 
-import com.ca.bms.entity.Sensor;
+import com.ca.bms.entitys.Sensor;
 
 /**
  * 传感器dao

@@ -2,7 +2,7 @@ package com.ca.bms.dao;
 
 import java.util.Date;
 
-import com.ca.bms.entity.SensorData;
+import com.ca.bms.entitys.SensorData;
 
 /**
  * 传感器数据Dao

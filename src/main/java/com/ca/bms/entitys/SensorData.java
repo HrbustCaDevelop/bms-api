@@ -1,4 +1,6 @@
-package com.ca.bms.entity;
+package com.ca.bms.entitys;
+
+import java.io.Serializable;
 
 /**
  * 传感器数据实体
@@ -6,7 +8,8 @@ package com.ca.bms.entity;
  * @since：2014年11月28日 下午6:02:23
  * @version:1.0
  */
-public class SensorData {
+public class SensorData implements Serializable{
+	private static final long serialVersionUID = 5088735295312561869L;
 	private Integer id;
 	private String createTime;
 	private String modifyTime;
