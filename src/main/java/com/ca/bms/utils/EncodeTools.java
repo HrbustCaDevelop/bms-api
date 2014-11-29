@@ -10,9 +10,23 @@ import java.security.NoSuchAlgorithmException;
  * @version:1.0
  */
 public class EncodeTools {
-	public static String encoder(String str) {
-		String salt = SHA1(Double.toString(Math.random())).substring(0, 4);
+	/**
+	 * 加密工具，采用两次hash加盐，安全性那是相当的不错，呵呵呵
+	 * @param str 待编码参数
+	 * @param salt 盐
+	 * @return
+	*/
+	public static String encoder(String str , String salt) {
 		return salt + MD5(SHA1(str + salt) + salt);
+	}
+	
+	/**
+	 * 客官来点盐
+	 * @return
+	*/
+	public static String giveMeSalt() {
+		String salt = SHA1(Double.toString(Math.random())).substring(0, 4);
+		return salt;
 	}
 	
 	/**
