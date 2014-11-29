@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ca.bms.dao.UserDao;
-import com.ca.bms.entitys.User;
+import com.ca.bms.entitys.UserEntity;
 
 /**
  * @author：刘志龙
@@ -18,7 +18,7 @@ public class UserDaoTest {
 	
 	@Test
 	public void testUserInsert() {
-		User user = new User();
+		UserEntity user = new UserEntity();
 		user.setNickname("逗比");
 		
 	}

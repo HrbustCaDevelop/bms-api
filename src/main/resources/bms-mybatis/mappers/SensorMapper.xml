@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ca.bms.dao.UserDao">
+<mapper namespace="com.ca.bms.dao.SensorDao">
 
-	<resultMap id="UserResultMap"
-		type="UserEntity">
+	<resultMap id="SensorResultMap"
+		type="SensorEntity">
 		<id column="ID" property="id" jdbcType="BIGINT" />
 		<result column="CREATE_TIME" property="createTime" jdbcType="timestamp" />
 		<result column="MODIFY_TIME" property="modifyTime" jdbcType="timestamp" />
@@ -16,28 +16,7 @@
                     select="SensorEntity.getSensorByUserId"/>
 	</resultMap>
 
-	<insert id="saveUserByUser" parameterType="UserEntity"
-		useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO bms_user
-		(
-		CREATE_TIME,
-		USERNAME,
-		PASSWORD,
-		NICKNAME,
-		PHONE_NUM
-		)
-		VALUES
-		(
-		CURRENT_TIMESTAMP,
-		#{username, jdbcType=VARCHAR},
-		#{password, jdbcType=VARCHAR},
-		#{nickname, jdbcType=VARCHAR},
-		#{phoneNum, jdbcType=VARCHAR}
-		)
-	</insert>
-
-	<select id="getUserByUsername" resultMap="UserResultMap"
-		parameterType="string">
+	<select id="getSensorByUserId" resultMap="SensorResultMap" parameterType="Long">
 		SELECT
 		ID,
 		CREATE_TIME,
@@ -52,5 +31,5 @@
 		WHERE
 		USERNAME=#{username}
 	</select>
-
+	
 </mapper>

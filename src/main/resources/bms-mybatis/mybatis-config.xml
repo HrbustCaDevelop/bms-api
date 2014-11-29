@@ -13,6 +13,8 @@
     </settings>
     
     <typeAliases>
-        <typeAlias type="com.ca.bms.entitys.User"/>
+        <typeAlias type="com.ca.bms.entitys.UserEntity"/>
+        <typeAlias type="com.ca.bms.entitys.SensorEntity"/>
+        <typeAlias type="com.ca.bms.entitys.SensorDataEntity"/>
     </typeAliases>
 </configuration>
