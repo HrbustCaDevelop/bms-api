@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
-import com.ca.bms.entitys.User;
+import com.ca.bms.entitys.UserEntity;
 import com.ca.bms.service.UserService;
 
 /**
@@ -24,7 +24,7 @@ public class UserController {
 	
 	@ResponseBody
 	@RequestMapping(value="/add",method=RequestMethod.POST, produces = "text/html;charset=UTF-8")
-	public Object addUser(User user) {
+	public Object addUser(UserEntity user) {
 		StringBuilder regMsg = new StringBuilder("{\"regStatus\":\"");
 		regMsg.append(userService.register(user).getDisplayName());
 		regMsg.append("\",\"UserData\":");
