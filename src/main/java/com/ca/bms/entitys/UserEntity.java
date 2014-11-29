@@ -101,4 +101,13 @@ public class UserEntity implements Serializable{
 	public void setAuthNum(int authNum) {
 		this.authNum = authNum;
 	}
+	
+	@Override
+	public String toString() {
+		return "UserEntity [id=" + id + ", createTime=" + createTime
+				+ ", modifyTime=" + modifyTime + ", version=" + version
+				+ ", username=" + username + ", password=" + password
+				+ ", nickname=" + nickname + ", phoneNum=" + phoneNum
+				+ ", authNum=" + authNum + ", sensorList=" + sensorList + "]";
+	}
 }

@@ -91,4 +91,13 @@ public class SensorDataEntity implements Serializable{
 	public void setSensorUUID(String sensorUUID) {
 		this.sensorUUID = sensorUUID;
 	}
+
+	@Override
+	public String toString() {
+		return "SensorDataEntity [id=" + id + ", createTime=" + createTime
+				+ ", modifyTime=" + modifyTime + ", version=" + version
+				+ ", temperature=" + temperature + ", humidity=" + humidity
+				+ ", co=" + co + ", smoke=" + smoke + ", sensorUUID="
+				+ sensorUUID + "]";
+	}
 }
