@@ -1,8 +1,10 @@
 package com.ca.bms.service.impl;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ca.bms.controllers.UserController;
 import com.ca.bms.dao.UserDao;
 import com.ca.bms.entitys.UserEntity;
 import com.ca.bms.enumtype.UserStatusEnum;
@@ -17,16 +19,24 @@ import com.ca.bms.utils.EncodeTools;
 @Service(value="userService")
 public class UserServiceImpl implements UserService {
 
+	private static Logger logger = Logger.getLogger(UserController.class);
+	
 	@Autowired
 	UserDao userDao;
 	
+	/**
+	 * 用户注册
+	 */
 	public UserStatusEnum register(UserEntity user) {
 		if (userDao.getUserByUsername(user.getUsername()) != null) {
+			//用户名已存在
 			return UserStatusEnum.AIE;
 		}else {
 			try {
-				user.setPassword(EncodeTools.encoder(user.getPassword()));
+				//对用户密码进行加密存储
+				user.setPassword(EncodeTools.encoder(user.getPassword(),EncodeTools.giveMeSalt()));
 				userDao.saveUserByUser(user);
+				logger.info("One User Register Successful :" + user.toString());
 				return UserStatusEnum.RS;
 			} catch (Exception e) {
 				return UserStatusEnum.RF;
