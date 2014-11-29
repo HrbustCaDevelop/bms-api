@@ -4,32 +4,43 @@
 
 <mapper namespace="com.ca.bms.dao.SensorDao">
 
-	<resultMap id="SensorResultMap"
-		type="SensorEntity">
+	<resultMap id="SensorResultMap" type="SensorEntity">
 		<id column="ID" property="id" jdbcType="BIGINT" />
-		<result column="CREATE_TIME" property="createTime" jdbcType="timestamp" />
-		<result column="MODIFY_TIME" property="modifyTime" jdbcType="timestamp" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="MODIFY_TIME" property="modifyTime" jdbcType="TIMESTAMP" />
 		<result column="VERSION" property="version" jdbcType="BIGINT" />
-		
-		
-		<collection column="USER_ID" property="sensorList" ofType="SensorEntity"
-                    select="SensorEntity.getSensorByUserId"/>
+		<result column="SERIAL_NUM" property="serialNum" jdbcType="VARCHAR" />
+		<result column="USER_ID" property="userId" jdbcType="BIGINT" />
+		<result column="SENSOR_TYPE" property="sensorType" jdbcType="VARCHAR" />
 	</resultMap>
+
+	<insert id="saveSensorBySensor" parameterType="SensorEntity" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO bms_sensor
+		(
+			CREATE_TIME,
+			SERIAL_NUM,
+			SENSOR_TYPE
+		)
+		VALUES
+		(
+			CURRENT_TIMESTAMP,
+			#{serialNum, jdbcType=VARCHAR},
+			#{sensorType, jdbcType=VARCHAR}
+		)
+	</insert>
 
 	<select id="getSensorByUserId" resultMap="SensorResultMap" parameterType="Long">
 		SELECT
-		ID,
-		CREATE_TIME,
-		MODIFY_TIME,
-		VERSION,
-		USERNAME,
-		PASSWORD,
-		NICKNAME,
-		PHONE_NUM,
-		AUTH_NUM
-		FROM bms_user
+			ID,
+			CREATE_TIME,
+			MODIFY_TIME,
+			VERSION,
+			SERIAL_NUM,
+			SENSOR_TYPE,
+			USER_ID
+		FROM bms_sensor
 		WHERE
-		USERNAME=#{username}
+			USER_ID=#{userid}
 	</select>
 	
 </mapper>

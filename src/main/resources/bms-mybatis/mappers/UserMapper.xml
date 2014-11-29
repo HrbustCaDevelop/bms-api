@@ -4,53 +4,54 @@
 
 <mapper namespace="com.ca.bms.dao.UserDao">
 
-	<resultMap id="UserResultMap"
-		type="UserEntity">
+	<resultMap id="UserResultMap" type="UserEntity">
 		<id column="ID" property="id" jdbcType="BIGINT" />
-		<result column="CREATE_TIME" property="createTime" jdbcType="timestamp" />
-		<result column="MODIFY_TIME" property="modifyTime" jdbcType="timestamp" />
-		<result column="VERSION" property="version" jdbcType="BIGINT" />
-		
-		
-		<collection column="USER_ID" property="sensorList" ofType="SensorEntity"
-                    select="SensorEntity.getSensorByUserId"/>
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="MODIFY_TIME" property="modifyTime" jdbcType="TIMESTAMP" />
+		<result column="VERSION" property="version" jdbcType="INTEGER" />
+		<result column="USERNAME" property="username" jdbcType="VARCHAR" />
+		<result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+		<result column="NICKNAME" property="nickname" jdbcType="VARCHAR" />
+		<result column="PHONE_NUM" property="phoneNum" jdbcType="VARCHAR" />
+		<result column="AUTH_NUM" property="authNum" jdbcType="INTEGER" />
+		<collection column="ID" property="sensorList" ofType="SensorEntity" select="SensorEntity.getSensorByUserId"/>
 	</resultMap>
 
 	<insert id="saveUserByUser" parameterType="UserEntity"
 		useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO bms_user
 		(
-		CREATE_TIME,
-		USERNAME,
-		PASSWORD,
-		NICKNAME,
-		PHONE_NUM
+			CREATE_TIME,
+			USERNAME,
+			PASSWORD,
+			NICKNAME,
+			PHONE_NUM
 		)
 		VALUES
 		(
-		CURRENT_TIMESTAMP,
-		#{username, jdbcType=VARCHAR},
-		#{password, jdbcType=VARCHAR},
-		#{nickname, jdbcType=VARCHAR},
-		#{phoneNum, jdbcType=VARCHAR}
+			CURRENT_TIMESTAMP,
+			#{username, jdbcType=VARCHAR},
+			#{password, jdbcType=VARCHAR},
+			#{nickname, jdbcType=VARCHAR},
+			#{phoneNum, jdbcType=VARCHAR}
 		)
 	</insert>
 
 	<select id="getUserByUsername" resultMap="UserResultMap"
 		parameterType="string">
 		SELECT
-		ID,
-		CREATE_TIME,
-		MODIFY_TIME,
-		VERSION,
-		USERNAME,
-		PASSWORD,
-		NICKNAME,
-		PHONE_NUM,
-		AUTH_NUM
+			ID,
+			CREATE_TIME,
+			MODIFY_TIME,
+			VERSION,
+			USERNAME,
+			PASSWORD,
+			NICKNAME,
+			PHONE_NUM,
+			AUTH_NUM
 		FROM bms_user
 		WHERE
-		USERNAME=#{username}
+			USERNAME=#{username}
 	</select>
 
 </mapper>

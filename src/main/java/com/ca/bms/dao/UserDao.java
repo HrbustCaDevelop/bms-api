@@ -29,7 +29,7 @@ public interface UserDao {
 	 * @param userid
 	 * @return
 	*/
-	UserEntity getUserById(int userid);
+	UserEntity getUserById(Long userid);
 	/**
 	 * 通过User查找User
 	 * @param user
