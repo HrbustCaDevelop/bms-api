@@ -14,7 +14,7 @@
 		<result column="NICKNAME" property="nickname" jdbcType="VARCHAR" />
 		<result column="PHONE_NUM" property="phoneNum" jdbcType="VARCHAR" />
 		<result column="AUTH_NUM" property="authNum" jdbcType="INTEGER" />
-		<collection column="ID" property="sensorList" ofType="SensorEntity" select="SensorEntity.getSensorByUserId"/>
+		<collection column="ID" property="sensorList" ofType="SensorEntity" select="com.ca.bms.dao.SensorDao.getSensorByUserId"/>
 	</resultMap>
 
 	<insert id="saveUserByUser" parameterType="UserEntity"

@@ -23,7 +23,7 @@ public class RequestTest {
     }
 
     @Test
-    public void testAliasRuleFetch() throws Exception {
+    public void test1UserAddByPOST() throws Exception {
     	
     	url = url + "/user/add";
     	

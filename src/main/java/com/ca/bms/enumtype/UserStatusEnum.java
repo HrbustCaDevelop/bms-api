@@ -9,7 +9,7 @@ import java.util.Map;
  * @version:1.0
  */
 public enum UserStatusEnum {
-	AIE("ACCOUNT_IS_EXIST", "该账户已经存在"), RF("REGISTER_FAIL", "注册失败"), RS("REGISTER_SUCCESS", "注册成功");
+	AIE("ACCOUNT_IS_EXIST", "该账户已经存在"), RF("REGISTER_FAIL", "注册失败"), PI("PARAM_ILLEGAL", "参数有误"), RS("REGISTER_SUCCESS", "注册成功");
 
 	private static Map<String, UserStatusEnum> valueMap = new HashMap<String, UserStatusEnum>();
 

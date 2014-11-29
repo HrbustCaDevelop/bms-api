@@ -28,6 +28,18 @@ public class UserServiceImpl implements UserService {
 	 * 用户注册
 	 */
 	public UserStatusEnum register(UserEntity user) {
+		if (user == null) {
+			return UserStatusEnum.PI;
+		}
+		try {
+			if (user.getUsername().trim().equals("") || user.getUsername() == null ||
+					user.getPassword().trim().equals("") || user.getPassword() == null ||
+					user.getNickname().trim().equals("") || user.getNickname() == null) {
+					return UserStatusEnum.PI;
+				}
+		} catch (Exception e) {
+			return UserStatusEnum.PI;
+		}
 		if (userDao.getUserByUsername(user.getUsername()) != null) {
 			//用户名已存在
 			return UserStatusEnum.AIE;
