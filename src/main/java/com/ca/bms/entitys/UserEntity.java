@@ -9,9 +9,9 @@ import java.util.List;
  * @since：2014年11月28日 下午1:51:10
  * @version:1.0
  */
-public class User implements Serializable{
+public class UserEntity implements Serializable{
 	private static final long serialVersionUID = -751832958410532799L;
-	private Integer id;
+	private Long id;
 	private String createTime;
 	private String modifyTime;
 	private int version;
@@ -20,21 +20,21 @@ public class User implements Serializable{
 	private String nickname;
 	private String phoneNum;
 	private int authNum;
-	private List<Sensor> sensorList;
+	private List<SensorEntity> sensorList;
 	
-	public List<Sensor> getSensorList() {
+	public List<SensorEntity> getSensorList() {
 		return sensorList;
 	}
 
-	public void setSensorList(List<Sensor> sensorList) {
+	public void setSensorList(List<SensorEntity> sensorList) {
 		this.sensorList = sensorList;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

@@ -8,9 +8,9 @@ import java.io.Serializable;
  * @since：2014年11月28日 下午6:02:23
  * @version:1.0
  */
-public class SensorData implements Serializable{
+public class SensorDataEntity implements Serializable{
 	private static final long serialVersionUID = 5088735295312561869L;
-	private Integer id;
+	private Long id;
 	private String createTime;
 	private String modifyTime;
 	private int version;
@@ -20,11 +20,11 @@ public class SensorData implements Serializable{
 	private double smoke;
 	private String sensorUUID;
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
