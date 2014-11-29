@@ -1,6 +1,8 @@
 package com.ca.bms.dao;
 
-import com.ca.bms.entitys.Sensor;
+import java.util.List;
+
+import com.ca.bms.entitys.SensorEntity;
 
 /**
  * 传感器dao
@@ -13,10 +15,17 @@ public interface SensorDao {
 	 * 保存传感器信息
 	 * @param sensor
 	*/
-	void saveSensorBySensor(Sensor sensor);
+	void saveSensorBySensor(SensorEntity sensor);
 	/**
 	 * 删除传感器信息
 	 * @param sensor
 	*/
-	void delSensorBySensor(Sensor sensor);
+	void delSensorBySensor(SensorEntity sensor);
+	
+	/**
+	 * 通过userid查找传感器
+	 * @param userid
+	 * @return
+	*/
+	List<SensorEntity> getSensorByUserId(Long userid);
 }

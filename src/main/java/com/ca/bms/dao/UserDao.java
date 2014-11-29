@@ -1,6 +1,6 @@
 package com.ca.bms.dao;
 
-import com.ca.bms.entitys.User;
+import com.ca.bms.entitys.UserEntity;
 
 /**
  * 用户dao操作
@@ -13,34 +13,34 @@ public interface UserDao {
 	 * 保存用户
 	 * @param user
 	*/
-	int saveUserByUser(User user);
+	int saveUserByUser(UserEntity user);
 	/**
 	 * 通过用户删除
 	 * @param user
 	*/
-	void delUserByUser(User user);
+	void delUserByUser(UserEntity user);
 	/**
 	 * 通过用户更新信息
 	 * @param user
 	*/
-	void updateUserByUser(User user);
+	void updateUserByUser(UserEntity user);
 	/**
 	 * 通过UserId查找User
 	 * @param userid
 	 * @return
 	*/
-	User getUserById(int userid);
+	UserEntity getUserById(int userid);
 	/**
 	 * 通过User查找User
 	 * @param user
 	 * @return
 	*/
-	User getUserByUser(User user);
+	UserEntity getUserByUser(UserEntity user);
 	
 	/**
 	 * 通过username查找user
 	 * @param username
 	 * @return
 	*/
-	User getUserByUsername(String username);
+	UserEntity getUserByUsername(String username);
 }

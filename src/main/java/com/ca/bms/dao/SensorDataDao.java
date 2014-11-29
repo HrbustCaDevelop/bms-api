@@ -2,7 +2,7 @@ package com.ca.bms.dao;
 
 import java.util.Date;
 
-import com.ca.bms.entitys.SensorData;
+import com.ca.bms.entitys.SensorDataEntity;
 
 /**
  * 传感器数据Dao
@@ -19,5 +19,5 @@ public interface SensorDataDao {
 	 * @param stoptime
 	 * @param num
 	*/
-	SensorData getSensorDataBySensorUUIDAndDatetime(int sensorUUID , Date starttime , Date stoptime , int num);
+	SensorDataEntity getSensorDataBySensorUUIDAndDatetime(int sensorUUID , Date starttime , Date stoptime , int num);
 }
