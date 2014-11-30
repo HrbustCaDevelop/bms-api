@@ -23,11 +23,8 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	UserDao userDao;
-	
-	/**
-	 * 用户注册
-	 */
-	public UserStatusEnum register(UserEntity user) {
+
+	public UserStatusEnum userRegister (UserEntity user) {
 		if (user == null) {
 			return UserStatusEnum.PI;
 		}
@@ -53,6 +50,37 @@ public class UserServiceImpl implements UserService {
 			} catch (Exception e) {
 				return UserStatusEnum.RF;
 			}
+		}
+	}
+
+	public UserStatusEnum userLogin(UserEntity user) {
+		if (user == null) {
+			return UserStatusEnum.PI;
+		}
+		try {
+			if (user.getUsername().trim().equals("") || user.getUsername() == null ||
+					user.getPassword().trim().equals("") || user.getPassword() == null) {
+					return UserStatusEnum.PI;
+				}
+		} catch (Exception e) {
+			return UserStatusEnum.PI;
+		}
+		if (userDao.getUserByUser(user) != null) {
+			return UserStatusEnum.LS;
+		}else {
+			return UserStatusEnum.LF;
+		}
+	}
+
+	public UserStatusEnum checkUsername(String username) {
+		if (username.trim().equals("") || null == username) {
+			return UserStatusEnum.PI;
+		}
+		if (userDao.getUserByUsername(username) != null) {
+			//用户名已存在
+			return UserStatusEnum.AIE;
+		} else {
+			return UserStatusEnum.ACBU;
 		}
 	}
 }

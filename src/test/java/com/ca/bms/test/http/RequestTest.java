@@ -36,5 +36,14 @@ public class RequestTest {
         System.out.println(HttpClientUtils.doPost(url, paramMap));
     }
 
-
+    @Test
+    public void test2CheckUsernameByPOST() throws Exception {
+    	
+    	url = url + "/user/checkusername";
+    	
+    	Map<String, String> paramMap = new HashMap<String, String>();
+    	paramMap.put("username", "旭神");
+    	paramMap.put("nickname", "逗比");
+        System.out.println(HttpClientUtils.doPost(url, paramMap));
+    }
 }

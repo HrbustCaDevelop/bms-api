@@ -15,5 +15,19 @@ public interface UserService {
 	 * @param user
 	 * @return
 	*/
-	UserStatusEnum register(UserEntity user);
+	UserStatusEnum userRegister(UserEntity user);
+	
+	/**
+	 * 用户登录
+	 * @param user
+	 * @return
+	*/
+	UserStatusEnum userLogin(UserEntity user);
+	
+	/**
+	 * 检查用户名是否存在
+	 * @param username
+	 * @return
+	*/
+	UserStatusEnum checkUsername(String username);
 }
