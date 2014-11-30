@@ -39,6 +39,7 @@ public class UserServiceImpl implements UserService {
 		}
 		if (userDao.getUserByUsername(user.getUsername()) != null) {
 			//用户名已存在
+			user.setPassword(EncodeTools.encoder(user.getPassword(),EncodeTools.giveMeSalt()));
 			return UserStatusEnum.AIE;
 		}else {
 			try {
@@ -65,9 +66,15 @@ public class UserServiceImpl implements UserService {
 		} catch (Exception e) {
 			return UserStatusEnum.PI;
 		}
-		if (userDao.getUserByUser(user) != null) {
-			return UserStatusEnum.LS;
-		}else {
+		UserEntity temp = userDao.getUserByUsername(user.getUsername());
+		if (temp != null) {
+			//该用户存在，对用户密码进行再加密对比
+			if (temp.getPassword() == EncodeTools.encoder(user.getPassword(), temp.getPassword().substring(0,4))) {
+				return UserStatusEnum.LS; 
+			}else {
+				return UserStatusEnum.LF;
+			}
+		} else {
 			return UserStatusEnum.LF;
 		}
 	}

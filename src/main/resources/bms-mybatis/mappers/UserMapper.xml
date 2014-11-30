@@ -54,4 +54,23 @@
 			USERNAME=#{username}
 	</select>
 
+	<select id="getUserByUser" resultMap="UserResultMap"
+		parameterType="UserEntity">
+		SELECT
+			ID,
+			CREATE_TIME,
+			MODIFY_TIME,
+			VERSION,
+			USERNAME,
+			PASSWORD,
+			NICKNAME,
+			PHONE_NUM,
+			AUTH_NUM
+		FROM bms_user
+		WHERE
+			USERNAME=#{username}
+		AND
+			PASSWORD=#{password}
+	</select>
+
 </mapper>

@@ -15,7 +15,7 @@ public enum UserStatusEnum {
 	PI("PARAM_ILLEGAL", "参数有误"), 
 	RS("REGISTER_SUCCESS", "注册成功"),
 	LS("LOGIN_SUCCESS", "登陆成功"),
-	LF("LOGIN_FAILED", "登陆失败");
+	LF("LOGIN_FAILED", "用户名或密码有误");
 
 	private static Map<String, UserStatusEnum> valueMap = new HashMap<String, UserStatusEnum>();
 

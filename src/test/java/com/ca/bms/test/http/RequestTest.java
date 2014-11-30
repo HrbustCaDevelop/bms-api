@@ -28,10 +28,10 @@ public class RequestTest {
     	url = url + "/user/add";
     	
     	Map<String, String> paramMap = new HashMap<String, String>();
-    	paramMap.put("username", "旭神");
+    	paramMap.put("username", "fangli");
     	paramMap.put("password", "123");
     	paramMap.put("phoneNum", "13764567998");
-    	paramMap.put("nickname", "逗比");
+    	paramMap.put("nickname", "test2");
     	
         System.out.println(HttpClientUtils.doPost(url, paramMap));
     }
@@ -44,6 +44,17 @@ public class RequestTest {
     	Map<String, String> paramMap = new HashMap<String, String>();
     	paramMap.put("username", "旭神");
     	paramMap.put("nickname", "逗比");
+        System.out.println(HttpClientUtils.doPost(url, paramMap));
+    }
+    
+    @Test
+    public void test3CheckLoginByPOST() throws Exception {
+    	
+    	url = url + "/user/login";
+    	
+    	Map<String, String> paramMap = new HashMap<String, String>();
+    	paramMap.put("username", "fangli");
+    	paramMap.put("password", "123");
         System.out.println(HttpClientUtils.doPost(url, paramMap));
     }
 }
