@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
 		UserEntity temp = userDao.getUserByUsername(user.getUsername());
 		if (temp != null) {
 			//该用户存在，对用户密码进行再加密对比
-			if (temp.getPassword() == EncodeTools.encoder(user.getPassword(), temp.getPassword().substring(0,4))) {
+			if (temp.getPassword().equals(EncodeTools.encoder(user.getPassword(), temp.getPassword().substring(0,4)))) {
 				return UserStatusEnum.LS; 
 			}else {
 				return UserStatusEnum.LF;
