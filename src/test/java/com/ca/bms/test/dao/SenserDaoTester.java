@@ -1,11 +1,12 @@
 package com.ca.bms.test.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import org.junit.Test;
 
+import com.alibaba.fastjson.JSON;
+import com.ca.bms.entitys.SensorDataEntity;
 import com.ca.bms.entitys.SensorEntity;
 import com.ca.bms.test.utils.SuperTestDependency;
 
@@ -29,5 +30,16 @@ public class SenserDaoTester extends SuperTestDependency {
 		for (SensorEntity sensorEntity : seList) {
 			System.out.println(sensorEntity.getSensorType());
 		}
+	}
+	
+	@Test
+	public void getJSON() {
+		SensorDataEntity sensorDataEntity = new SensorDataEntity();
+		sensorDataEntity.setTemperature(25L);
+		sensorDataEntity.setHumidity(12L);
+		sensorDataEntity.setCo(10L);
+		sensorDataEntity.setSmoke(10L);
+		sensorDataEntity.setSerialNum("78esskrjrskjdhg");
+		System.out.println(JSON.toJSONString(sensorDataEntity));
 	}
 }

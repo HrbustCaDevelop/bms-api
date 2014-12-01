@@ -28,10 +28,10 @@ public class RequestTest {
     	url = url + "/user/add";
     	
     	Map<String, String> paramMap = new HashMap<String, String>();
-    	paramMap.put("username", "fangli");
-    	paramMap.put("password", "123");
+    	paramMap.put("username", "user1");
+    	paramMap.put("password", "pass1");
     	paramMap.put("phoneNum", "13764567998");
-    	paramMap.put("nickname", "test2");
+    	paramMap.put("nickname", "nick1");
     	
         System.out.println(HttpClientUtils.doPost(url, paramMap));
     }
@@ -53,8 +53,19 @@ public class RequestTest {
     	url = url + "/user/login";
     	
     	Map<String, String> paramMap = new HashMap<String, String>();
-    	paramMap.put("username", "fangli");
-    	paramMap.put("password", "123");
+    	paramMap.put("username", "user1");
+    	paramMap.put("password", "pass1");
+        System.out.println(HttpClientUtils.doPost(url, paramMap));
+    }
+    
+    @Test
+    public void test4CheckLogoutByPOST() throws Exception {
+    	
+    	url = url + "/user/logout";
+    	
+    	Map<String, String> paramMap = new HashMap<String, String>();
+    	paramMap.put("username", "user1");
+    	paramMap.put("userToken", "42ffb7e5-c05c-4869-91ca-b650781cdd16");
         System.out.println(HttpClientUtils.doPost(url, paramMap));
     }
 }
