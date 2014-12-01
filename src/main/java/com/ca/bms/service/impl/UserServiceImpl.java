@@ -4,7 +4,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ca.bms.controllers.UserController;
 import com.ca.bms.dao.UserDao;
 import com.ca.bms.entitys.UserEntity;
 import com.ca.bms.enumtype.UserStatusEnum;
@@ -19,7 +18,7 @@ import com.ca.bms.utils.EncodeTools;
 @Service(value="userService")
 public class UserServiceImpl implements UserService {
 
-	private static Logger logger = Logger.getLogger(UserController.class);
+	private static Logger logger = Logger.getLogger(UserServiceImpl.class);
 	
 	@Autowired
 	UserDao userDao;
@@ -29,9 +28,8 @@ public class UserServiceImpl implements UserService {
 			return UserStatusEnum.PI;
 		}
 		try {
-			if (user.getUsername().trim().equals("") || user.getUsername() == null ||
-					user.getPassword().trim().equals("") || user.getPassword() == null ||
-					user.getNickname().trim().equals("") || user.getNickname() == null) {
+			if (user.getUsername().trim().equals("") ||
+				user.getPassword().trim().equals("")) {
 					return UserStatusEnum.PI;
 				}
 		} catch (Exception e) {
@@ -45,9 +43,12 @@ public class UserServiceImpl implements UserService {
 			try {
 				//对用户密码进行加密存储
 				user.setPassword(EncodeTools.encoder(user.getPassword(),EncodeTools.giveMeSalt()));
-				userDao.saveUserByUser(user);
-				logger.info("One User Register Successful :" + user.toString());
-				return UserStatusEnum.RS;
+				if (userDao.saveUserByUser(user) > 0) {
+					logger.info("One User Register Successful :" + user.toString());
+					return UserStatusEnum.RS;
+				} else {
+					return UserStatusEnum.RF;
+				}
 			} catch (Exception e) {
 				return UserStatusEnum.RF;
 			}
@@ -89,5 +90,10 @@ public class UserServiceImpl implements UserService {
 		} else {
 			return UserStatusEnum.ACBU;
 		}
+	}
+
+	@Override
+	public UserStatusEnum updateUserMsg(UserEntity user) {
+		return UserStatusEnum.ACBU;
 	}
 }

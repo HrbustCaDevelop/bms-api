@@ -18,86 +18,65 @@ public class SensorDataEntity implements Serializable{
 	private double humidity;
 	private double co;
 	private double smoke;
-	private String sensorUUID;
-
+	private String serialNum;
 	public Long getId() {
 		return id;
 	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 	public String getCreateTime() {
 		return createTime;
 	}
-
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
-
 	public String getModifyTime() {
 		return modifyTime;
 	}
-
 	public void setModifyTime(String modifyTime) {
 		this.modifyTime = modifyTime;
 	}
-
 	public int getVersion() {
 		return version;
 	}
-
 	public void setVersion(int version) {
 		this.version = version;
 	}
-
 	public double getTemperature() {
 		return temperature;
 	}
-
 	public void setTemperature(double temperature) {
 		this.temperature = temperature;
 	}
-
 	public double getHumidity() {
 		return humidity;
 	}
-
 	public void setHumidity(double humidity) {
 		this.humidity = humidity;
 	}
-
 	public double getCo() {
 		return co;
 	}
-
 	public void setCo(double co) {
 		this.co = co;
 	}
-
 	public double getSmoke() {
 		return smoke;
 	}
-
 	public void setSmoke(double smoke) {
 		this.smoke = smoke;
 	}
-
-	public String getSensorUUID() {
-		return sensorUUID;
+	public String getSerialNum() {
+		return serialNum;
 	}
-
-	public void setSensorUUID(String sensorUUID) {
-		this.sensorUUID = sensorUUID;
+	public void setSerialNum(String serialNum) {
+		this.serialNum = serialNum;
 	}
-
 	@Override
 	public String toString() {
-		return "SensorDataEntity [id=" + id + ", createTime=" + createTime
-				+ ", modifyTime=" + modifyTime + ", version=" + version
-				+ ", temperature=" + temperature + ", humidity=" + humidity
-				+ ", co=" + co + ", smoke=" + smoke + ", sensorUUID="
-				+ sensorUUID + "]";
+		return "SensorDataEntity [id=" + id + ", temperature=" + temperature
+				+ ", humidity=" + humidity + ", co=" + co + ", smoke=" + smoke
+				+ ", serialNum=" + serialNum + "]";
 	}
 }

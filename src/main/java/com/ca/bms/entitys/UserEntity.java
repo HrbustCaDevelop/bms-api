@@ -5,11 +5,12 @@ import java.util.List;
 
 /**
  * 用户类
+ * 
  * @author：刘志龙
  * @since：2014年11月28日 下午1:51:10
  * @version:1.0
  */
-public class UserEntity implements Serializable{
+public class UserEntity implements Serializable {
 	private static final long serialVersionUID = -751832958410532799L;
 	private Long id;
 	private String createTime;
@@ -21,7 +22,7 @@ public class UserEntity implements Serializable{
 	private String phoneNum;
 	private int authNum;
 	private List<SensorEntity> sensorList;
-	
+
 	public List<SensorEntity> getSensorList() {
 		return sensorList;
 	}
@@ -101,13 +102,11 @@ public class UserEntity implements Serializable{
 	public void setAuthNum(int authNum) {
 		this.authNum = authNum;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "UserEntity [id=" + id + ", createTime=" + createTime
-				+ ", modifyTime=" + modifyTime + ", version=" + version
-				+ ", username=" + username + ", password=" + password
+		return "UserEntity [id=" + id + ", username=" + username
 				+ ", nickname=" + nickname + ", phoneNum=" + phoneNum
-				+ ", authNum=" + authNum + ", sensorList=" + sensorList + "]";
+				+ ", authNum=" + "]";
 	}
 }

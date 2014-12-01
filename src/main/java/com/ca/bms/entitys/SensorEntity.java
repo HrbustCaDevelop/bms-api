@@ -61,10 +61,7 @@ public class SensorEntity implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "SensorEntity [id=" + id + ", createTime=" + createTime
-				+ ", modifyTime=" + modifyTime + ", version=" + version
-				+ ", serialNum=" + serialNum + ", userId=" + userId
-				+ ", sensorType=" + sensorType + "]";
+		return "SensorEntity [id=" + id + ", serialNum=" + serialNum
+				+ ", userId=" + userId + ", sensorType=" + sensorType + "]";
 	}
-
 }

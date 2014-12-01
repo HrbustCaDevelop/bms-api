@@ -12,9 +12,11 @@ public enum UserStatusEnum {
 	AIE("ACCOUNT_IS_EXIST", "该用户名已经存在"),
 	ACBU("ACCOUNT_CAN_BE_USE", "该用户名可以被使用"),
 	RF("REGISTER_FAIL", "注册失败"), 
-	PI("PARAM_ILLEGAL", "参数有误"), 
+	PI("PARAM_ILLEGAL", "参数错误"), 
 	RS("REGISTER_SUCCESS", "注册成功"),
 	LS("LOGIN_SUCCESS", "登陆成功"),
+	UINI("USER_IS_NOT_INSIDE", "用户未登陆"),
+	UILO("USER_IS_LOGOUT", "用户已退出"),
 	LF("LOGIN_FAILED", "用户名或密码有误");
 
 	private static Map<String, UserStatusEnum> valueMap = new HashMap<String, UserStatusEnum>();

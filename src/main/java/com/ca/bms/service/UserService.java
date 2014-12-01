@@ -30,4 +30,11 @@ public interface UserService {
 	 * @return
 	*/
 	UserStatusEnum checkUsername(String username);
+	
+	/**
+	 * 更新用户信息
+	 * @param user
+	 * @return
+	*/
+	UserStatusEnum updateUserMsg(UserEntity user);
 }

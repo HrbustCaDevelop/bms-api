@@ -13,6 +13,13 @@ import com.ca.bms.entitys.SensorDataEntity;
 public interface SensorDataDao {
 
 	/**
+	 * 保存传感器数据
+	 * @param sensorDataEntity
+	 * @return
+	*/
+	int savaSensorDataByObject(SensorDataEntity sensorDataEntity);
+	
+	/**
 	 * 通过传感器UUID和时间范围获取传感器数据
 	 * @param sensorUUID
 	 * @param starttime
