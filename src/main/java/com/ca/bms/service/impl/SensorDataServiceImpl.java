@@ -28,11 +28,7 @@ public class SensorDataServiceImpl implements SensorDataService {
 			return SensorDataStatusEnum.PI;
 		}
 		try {
-			if (String.valueOf(sensorDataEntity.getTemperature()).trim().equals("") ||
-				String.valueOf(sensorDataEntity.getHumidity()).trim().equals("") ||
-				String.valueOf(sensorDataEntity.getSmoke()).trim().equals("") ||
-				String.valueOf(sensorDataEntity.getCo()).trim().equals("") ||
-				String.valueOf(sensorDataEntity.getSerialNum()).trim().equals("")) {
+			if (sensorDataEntity.getSerialNum().trim().equals("")) {
 					return SensorDataStatusEnum.PI;
 				}
 		} catch (Exception e) {
