@@ -18,7 +18,7 @@
 		init-method="init" destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url"
-			value="jdbc:mysql://127.0.0.1/buildingmonitor?useUnicode=true&amp;characterEncoding=utf-8" />
+			value="jdbc:mysql://222.27.196.234/buildingmonitor?useUnicode=true&amp;characterEncoding=utf-8" />
 		<property name="username" value="root" />
 		<property name="password" value="kismet" />
 		<property name="initialSize" value="3" />

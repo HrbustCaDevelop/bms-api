@@ -15,7 +15,7 @@ public enum UserStatusEnum {
 	PI("PARAM_ILLEGAL", "参数错误"), 
 	RS("REGISTER_SUCCESS", "注册成功"),
 	LS("LOGIN_SUCCESS", "登陆成功"),
-	UINI("USER_IS_NOT_INSIDE", "用户未登陆"),
+	UINI("USER_IS_NOT_INSIDE", "请先登陆"),
 	UILO("USER_IS_LOGOUT", "用户已退出"),
 	LF("LOGIN_FAILED", "用户名或密码有误");
 

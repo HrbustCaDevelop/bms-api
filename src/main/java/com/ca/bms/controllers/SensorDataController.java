@@ -46,4 +46,18 @@ public class SensorDataController {
 		logger.info("Receive User Add Request! :" + sensorDataEntity.toString());
 		return regMsg.toString();
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/realtime", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+	public Object getRealtimeSensorData(
+			@RequestParam(value="username",required = true) double smoke,
+			@RequestParam(value="serialNum",required = true) String serialNum) {
+
+		StringBuilder regMsg = new StringBuilder("{\"returnMsg\":\"");
+		// 拼接JSON，使用JSON返回用户添加的结果以及用户数据，用于验证用户添加是否成功
+//		regMsg.append(sensorDataService.savaSensorData(sensorDataEntity).getDisplayName());
+//		regMsg.append("\"}");
+//		logger.info("反馈一条实时数据 :" + );
+		return regMsg.toString();
+	}
 }

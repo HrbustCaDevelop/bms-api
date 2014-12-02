@@ -2,6 +2,7 @@ package com.ca.bms.controllers;
 
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -76,7 +77,8 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
-	public Object login(UserEntity user, HttpSession session) {
+	public Object login(UserEntity user, HttpServletRequest request) {
+		HttpSession session = request.getSession();
 		StringBuilder regMsg = new StringBuilder("{\"returnMsg\":\"");
 		logger.info("Receive User Login Request! :" + user.toString());
 		switch (userService.userLogin(user)) {
@@ -92,7 +94,8 @@ public class UserController {
 			regMsg.append(UserStatusEnum.LS.getDisplayName());
 			//登陆成功授予一个Token，防止重复登陆，用于以后请求鉴权
 			String userToken = UUID.randomUUID().toString();
-			session.setAttribute(user.getUsername(), userToken);
+			session.setAttribute("username", user.getUsername());
+			session.setAttribute("usertoken", userToken);
 			regMsg.append("\",\"userToken\":\"" + userToken + "\"");
 			break;
 		default:
@@ -112,35 +115,22 @@ public class UserController {
 	*/
 	@ResponseBody
 	@RequestMapping(value = "/logout", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
-	public Object logout(@RequestParam(value="username",required = true) String username, @RequestParam(value="userToken",required = true) String userToken, HttpSession session) {
+	public Object logout(@RequestParam(value="username",required = true) String username, @RequestParam(value="usertoken",required = true) String usertoken, HttpServletRequest request) {
+		HttpSession session = request.getSession();
 		StringBuilder regMsg = new StringBuilder("{\"returnMsg\":\"");
-		String tokenInS = session.getAttribute(username).toString();
-		if (tokenInS.trim().equals("") || null == tokenInS) {
+		Object jusername = session.getAttribute("username");
+		Object jusertoken = session.getAttribute("usertoken");
+		if (jusername == null || jusertoken == null) {
 			regMsg.append(UserStatusEnum.UINI.getDisplayName());
-		}else if (!tokenInS.equals(userToken)) {
-			regMsg.append(UserStatusEnum.PI.getDisplayName());
-		}else {
-			session.removeAttribute(username);
+		}else if (jusername.equals(username) && jusertoken.equals(usertoken)) {
+			session.removeAttribute("username");
+			session.removeAttribute("usertoken");
 			regMsg.append(UserStatusEnum.UILO.getDisplayName());
+		}else {
+			regMsg.append(UserStatusEnum.PI.getDisplayName());
 		}
 		regMsg.append("\"}");
 		logger.info("User Logout: " + username);
-		return regMsg;
-	}
-	
-	@ResponseBody
-	@RequestMapping(value = "/update", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
-	public Object updateUserMsg(UserEntity user,  @RequestParam(value="userToken",required = true) String userToken, HttpSession session) {
-		StringBuilder regMsg = new StringBuilder("{\"returnMsg\":\"");
-		if (null == user || user.getUsername().trim().equals("") || user.getUsername() == null) {
-			regMsg.append(UserStatusEnum.PI.getDisplayName());
-		}else if(!session.getAttribute(user.getUsername()).toString().equals(userToken)){
-			regMsg.append(UserStatusEnum.UINI.getDisplayName());
-		}else {
-			
-		}
-		regMsg.append("\"}");
-		logger.info("Receive User Update Message Request! :" + user.getUsername());
 		return regMsg.toString();
 	}
 }
