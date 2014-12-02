@@ -2,6 +2,8 @@ package com.ca.bms.dao;
 
 import java.util.Date;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.ca.bms.entitys.SensorDataEntity;
 
 /**
@@ -25,5 +27,5 @@ public interface SensorDataDao {
 	 * @param timestamp
 	 * @param num
 	*/
-	SensorDataEntity getSensorDataBySensorUUIDAndDatetime(String serialNum , Date timestamp , int num);
+	SensorDataEntity getSensorDataBySensorUUIDAndDatetime(@Param("serialnum")String serialNum , @Param("timecut")Date timecut , @Param("num")int num);
 }

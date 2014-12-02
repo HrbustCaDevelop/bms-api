@@ -4,16 +4,18 @@
 
 <mapper namespace="com.ca.bms.dao.SensorDataDao">
 
-	<!-- <resultMap id="SensorResultMap" type="SensorEntity">
+	<resultMap id="SensorDataResultMap" type="SensorDataEntity">
 		<id column="ID" property="id" jdbcType="BIGINT" />
 		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
 		<result column="MODIFY_TIME" property="modifyTime" jdbcType="TIMESTAMP" />
 		<result column="VERSION" property="version" jdbcType="BIGINT" />
+		<result column="TEMPERATURE" property="temperature" jdbcType="DOUBLE" />
+		<result column="HUMIDITY" property="humidity" jdbcType="DOUBLE" />
+		<result column="CO" property="co" jdbcType="DOUBLE" />
+		<result column="SMOKE" property="smoke" jdbcType="DOUBLE" />
 		<result column="SERIAL_NUM" property="serialNum" jdbcType="VARCHAR" />
-		<result column="USER_ID" property="userId" jdbcType="BIGINT" />
-		<result column="SENSOR_TYPE" property="sensorType" jdbcType="VARCHAR" />
 	</resultMap>
- -->
+
 	<insert id="savaSensorDataByObject" parameterType="SensorDataEntity" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO bms_data
 		(
@@ -35,18 +37,22 @@
 		)
 	</insert>
 
-	<!-- <select id="getSensorByUserId" resultMap="SensorResultMap" parameterType="Long">
+	<select id="getSensorDataBySensorUUIDAndDatetime" resultMap="SensorDataResultMap">
 		SELECT
 			ID,
 			CREATE_TIME,
-			MODIFY_TIME,
-			VERSION,
-			SERIAL_NUM,
-			SENSOR_TYPE,
-			USER_ID
-		FROM bms_sensor
+			TEMPERATURE,
+			HUMIDITY,
+			CO,
+			SMOKE
+		FROM
+			bms_data
 		WHERE
-			USER_ID=#{userid}
+			SERIAL_NUM = #{serialnum}
+		AND CREATE_TIME > #{timecut}
+		ORDER BY ID
+		DESC
+		LIMIT #{num}
 	</select>
-	 -->
+	
 </mapper>
