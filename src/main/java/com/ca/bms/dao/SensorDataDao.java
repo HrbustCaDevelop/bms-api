@@ -22,9 +22,8 @@ public interface SensorDataDao {
 	/**
 	 * 通过传感器UUID和时间范围获取传感器数据
 	 * @param sensorUUID
-	 * @param starttime
-	 * @param stoptime
+	 * @param timestamp
 	 * @param num
 	*/
-	SensorDataEntity getSensorDataBySensorUUIDAndDatetime(int sensorUUID , Date starttime , Date stoptime , int num);
+	SensorDataEntity getSensorDataBySensorUUIDAndDatetime(String serialNum , Date timestamp , int num);
 }

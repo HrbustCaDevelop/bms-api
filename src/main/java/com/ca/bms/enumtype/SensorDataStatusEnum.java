@@ -10,6 +10,7 @@ import java.util.Map;
  */
 public enum SensorDataStatusEnum {
 	PI("PARAM_ILLEGAL", "参数错误"), 
+	DFS("DATA_FETCH_SUCCESS", "数据获取成功"),
 	DIS("DATA_INSERT_SUCCESS", "数据接收成功"),
 	DIF("DATA_INSERT_FAILED", "数据接收失败");
 

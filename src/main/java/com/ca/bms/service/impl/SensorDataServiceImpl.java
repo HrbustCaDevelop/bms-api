@@ -1,5 +1,9 @@
 package com.ca.bms.service.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,6 +48,14 @@ public class SensorDataServiceImpl implements SensorDataService {
 		} catch (Exception e) {
 			return SensorDataStatusEnum.DIF;
 		}
+	}
+
+	@Override
+	public SensorDataEntity getRealTimeDataBySerialNum(String serialNum) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+		Date temp = sdf.parse("1000-01-01 01:01:01");  
+	    sdf.format(temp);  
+		return sensorDataDao.getSensorDataBySensorUUIDAndDatetime(serialNum, temp, 1);
 	}
 
 }

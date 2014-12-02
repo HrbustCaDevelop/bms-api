@@ -1,5 +1,7 @@
 package com.ca.bms.service;
 
+import java.text.ParseException;
+
 import com.ca.bms.entitys.SensorDataEntity;
 import com.ca.bms.enumtype.SensorDataStatusEnum;
 
@@ -15,4 +17,12 @@ public interface SensorDataService {
 	 * @return
 	*/
 	SensorDataStatusEnum savaSensorData(SensorDataEntity sensorDataEntity);
+	
+	/**
+	 * 通过传感器序列号获取实时数据
+	 * @param serialNum
+	 * @return
+	 * @throws ParseException 
+	*/
+	SensorDataEntity getRealTimeDataBySerialNum(String serialNum) throws ParseException;
 }

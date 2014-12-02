@@ -41,10 +41,10 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value = "/add", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	public Object addUser(UserEntity user) {
-		StringBuilder regMsg = new StringBuilder("{\"returnMsg\":\"");
+		StringBuilder regMsg = new StringBuilder("{\"returnmsg\":\"");
 		// 拼接JSON，使用JSON返回用户添加的结果以及用户数据，用于验证用户添加是否成功
 		regMsg.append(userService.userRegister(user).getDisplayName());
-		regMsg.append("\",\"userData\":");
+		regMsg.append("\",\"userdata\":");
 		regMsg.append(JSON.toJSONString(user));
 		regMsg.append("}");
 		logger.info("Receive User Add Request! :" + user.toString());
@@ -60,7 +60,7 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value = "/checkusername", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	public Object checkUsername(String username) {
-		StringBuilder regMsg = new StringBuilder("{\"returnMsg\":\"");
+		StringBuilder regMsg = new StringBuilder("{\"returnmsg\":\"");
 		regMsg.append(userService.checkUsername(username).getDisplayName());
 		regMsg.append("\",\"username\":");
 		regMsg.append("\"" + username + "\"");
@@ -79,16 +79,16 @@ public class UserController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	public Object login(UserEntity user, HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		StringBuilder regMsg = new StringBuilder("{\"returnMsg\":\"");
+		StringBuilder regMsg = new StringBuilder("{\"returnmsg\":\"");
 		logger.info("Receive User Login Request! :" + user.toString());
 		switch (userService.userLogin(user)) {
 		case PI:
 			regMsg.append(UserStatusEnum.PI.getDisplayName());
-			regMsg.append("\",\"userToken\":\"null\"");
+			regMsg.append("\",\"usertoken\":\"null\"");
 			break;
 		case LF:
 			regMsg.append(UserStatusEnum.LF.getDisplayName());
-			regMsg.append("\",\"userToken\":\"null\"");
+			regMsg.append("\",\"usertoken\":\"null\"");
 			break;
 		case LS:
 			regMsg.append(UserStatusEnum.LS.getDisplayName());
@@ -96,11 +96,11 @@ public class UserController {
 			String userToken = UUID.randomUUID().toString();
 			session.setAttribute("username", user.getUsername());
 			session.setAttribute("usertoken", userToken);
-			regMsg.append("\",\"userToken\":\"" + userToken + "\"");
+			regMsg.append("\",\"usertoken\":\"" + userToken + "\"");
 			break;
 		default:
 			regMsg.append(UserStatusEnum.PI.getDisplayName());
-			regMsg.append("\",\"userToken\":\"null\"");
+			regMsg.append("\",\"usertoken\":\"null\"");
 			break;
 		}
 		regMsg.append("}");
@@ -117,7 +117,7 @@ public class UserController {
 	@RequestMapping(value = "/logout", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	public Object logout(@RequestParam(value="username",required = true) String username, @RequestParam(value="usertoken",required = true) String usertoken, HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		StringBuilder regMsg = new StringBuilder("{\"returnMsg\":\"");
+		StringBuilder regMsg = new StringBuilder("{\"returnmsg\":\"");
 		Object jusername = session.getAttribute("username");
 		Object jusertoken = session.getAttribute("usertoken");
 		if (jusername == null || jusertoken == null) {
