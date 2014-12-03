@@ -83,7 +83,7 @@ public class SensorDataController {
 			@RequestParam(value="serialnum",required = true) String serialnum,
 			@RequestParam(value="usertoken",required = true) String usertoken,
 			HttpSession session) {
-		StringBuilder regMsg = new StringBuilder("{\"returnMsg\":\"");
+		StringBuilder regMsg = new StringBuilder("{\"returnmsg\":\"");
 		
 		if (username.trim().equals("") ||
 				serialnum.trim().equals("") ||
@@ -107,14 +107,14 @@ public class SensorDataController {
 			try {
 				sde = sensorDataService.getRealTimeDataBySerialNum(serialnum);
 				if (sde == null) {
-					regMsg.append(SensorDataStatusEnum.PI);
+					regMsg.append(SensorDataStatusEnum.PI.getDisplayName());
 					regMsg.append("\"}");
 					return regMsg.toString();
 				}else {
-					regMsg.append(SensorDataStatusEnum.DFS);
+					regMsg.append(SensorDataStatusEnum.DFS.getDisplayName());
 				}
 			} catch (ParseException e) {
-				regMsg.append(SensorDataStatusEnum.PI);
+				regMsg.append(SensorDataStatusEnum.PI.getDisplayName());
 				regMsg.append("\"}");
 				return regMsg.toString();
 			}
