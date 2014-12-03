@@ -82,7 +82,7 @@ public class SensorDataController {
 			@RequestParam(value="username",required = true) String username,
 			@RequestParam(value="serialnum",required = true) String serialnum,
 			@RequestParam(value="usertoken",required = true) String usertoken,
-			 HttpServletRequest request) {
+			HttpSession session) {
 		StringBuilder regMsg = new StringBuilder("{\"returnMsg\":\"");
 		
 		if (username.trim().equals("") ||
@@ -93,7 +93,6 @@ public class SensorDataController {
 			return regMsg.toString();
 		}
 		
-		HttpSession session = request.getSession();
 		Object jusername = session.getAttribute("username");
 		Object jusertoken = session.getAttribute("usertoken");
 		

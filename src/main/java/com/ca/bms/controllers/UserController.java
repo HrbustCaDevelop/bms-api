@@ -77,8 +77,7 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
-	public Object login(UserEntity user, HttpServletRequest request) {
-		HttpSession session = request.getSession();
+	public Object login(UserEntity user, HttpSession session) {
 		StringBuilder regMsg = new StringBuilder("{\"returnmsg\":\"");
 		logger.info("Receive User Login Request! :" + user.toString());
 		switch (userService.userLogin(user)) {
@@ -115,8 +114,10 @@ public class UserController {
 	*/
 	@ResponseBody
 	@RequestMapping(value = "/logout", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
-	public Object logout(@RequestParam(value="username",required = true) String username, @RequestParam(value="usertoken",required = true) String usertoken, HttpServletRequest request) {
-		HttpSession session = request.getSession();
+	public Object logout(
+			@RequestParam(value="username",required = true) String username, 
+			@RequestParam(value="usertoken",required = true) String usertoken, 
+			HttpSession session) {
 		StringBuilder regMsg = new StringBuilder("{\"returnmsg\":\"");
 		Object jusername = session.getAttribute("username");
 		Object jusertoken = session.getAttribute("usertoken");
