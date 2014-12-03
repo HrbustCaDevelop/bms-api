@@ -68,4 +68,15 @@ public class RequestTest {
     	paramMap.put("userToken", "42ffb7e5-c05c-4869-91ca-b650781cdd16");
         System.out.println(HttpClientUtils.doPost(url, paramMap));
     }
+    
+    @Test
+    public void test5CheckLogoutByPOST() throws Exception {
+    	
+    	url = url + "/user/logout";
+    	
+    	Map<String, String> paramMap = new HashMap<String, String>();
+    	paramMap.put("username", "user1");
+    	paramMap.put("userToken", "42ffb7e5-c05c-4869-91ca-b650781cdd16");
+        System.out.println(HttpClientUtils.doPost(url, paramMap));
+    }
 }
