@@ -33,6 +33,15 @@ public class SensorDataController {
 	@Autowired
 	SensorDataService sensorDataService;
 	
+	/**
+	 * 添加一条传感器数据
+	 * @param temperature
+	 * @param humidity
+	 * @param co
+	 * @param smoke
+	 * @param serialnum
+	 * @return
+	*/
 	@ResponseBody
 	@RequestMapping(value = "/add", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	public Object addSensorData(
@@ -59,6 +68,14 @@ public class SensorDataController {
 		return regMsg.toString();
 	}
 	
+	/**
+	 * 获取实时数据
+	 * @param username
+	 * @param serialnum
+	 * @param usertoken
+	 * @param request
+	 * @return
+	*/
 	@ResponseBody
 	@RequestMapping(value = "/realtime", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	public Object getRealtimeSensorData(
@@ -79,9 +96,14 @@ public class SensorDataController {
 		HttpSession session = request.getSession();
 		Object jusername = session.getAttribute("username");
 		Object jusertoken = session.getAttribute("usertoken");
+		
 		if (jusername == null || jusertoken == null) {
-			regMsg.append(UserStatusEnum.UINI.getDisplayName() + "\"");
+			//session中无数据
+			regMsg.append(UserStatusEnum.UINI.getDisplayName());
+			regMsg.append("\"}");
+			return regMsg.toString();
 		}else if (jusername.equals(username) && jusertoken.equals(usertoken)) {
+			//用户数据正常
 			SensorDataEntity sde = null;
 			try {
 				sde = sensorDataService.getRealTimeDataBySerialNum(serialnum);
@@ -100,12 +122,12 @@ public class SensorDataController {
 			regMsg.append("\",\"data\":");
 			regMsg.append(JSON.toJSONString(sde));
 			logger.info("返回一条实时数据! :" + sde.toString());
+			regMsg.append("}");
+			return regMsg.toString();
 		}else {
 			regMsg.append(UserStatusEnum.PI.getDisplayName());
 			regMsg.append("\"}");
 			return regMsg.toString();
 		}
-		regMsg.append("}");
-		return regMsg.toString();
 	}
 }
