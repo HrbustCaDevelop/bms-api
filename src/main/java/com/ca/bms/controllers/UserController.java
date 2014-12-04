@@ -1,6 +1,8 @@
 package com.ca.bms.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.ca.bms.entitys.SensorEntity;
 import com.ca.bms.entitys.UserEntity;
+import com.ca.bms.enumtype.SensorDataStatusEnum;
 import com.ca.bms.enumtype.UserStatusEnum;
 import com.ca.bms.service.UserService;
 import com.ca.bms.utils.EncodeTools;
@@ -82,7 +85,8 @@ public class UserController {
 	public Object login(UserEntity user, HttpSession session) {
 		StringBuilder regMsg = new StringBuilder("{\"returnmsg\":\"");
 		logger.info("Receive User Login Request! :" + user.toString());
-		switch (userService.userLogin(user)) {
+		Map<String, Object> returnMap = userService.userLogin(user);
+		switch ((UserStatusEnum)returnMap.get("status")) {
 		case PI:
 			regMsg.append(UserStatusEnum.PI.getDisplayName());
 			regMsg.append("\",\"usertoken\":\"null\"");
@@ -98,6 +102,7 @@ public class UserController {
 			session.setAttribute("username", user.getUsername());
 			session.setAttribute("usertoken", userToken);
 			regMsg.append("\",\"usertoken\":\"" + userToken + "\"");
+			regMsg.append("\",\"userdata\":\"" + JSON.toJSONString((UserEntity)returnMap.get("userdata")) + "\"");
 			break;
 		default:
 			regMsg.append(UserStatusEnum.PI.getDisplayName());
@@ -137,6 +142,13 @@ public class UserController {
 		return regMsg.toString();
 	}
 	
+	/**
+	 * 获取用户的传感器信息
+	 * @param username
+	 * @param usertoken
+	 * @param session
+	 * @return
+	*/
 	@ResponseBody
 	@RequestMapping(value = "/mysensor", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	public Object getMySensor(
@@ -164,5 +176,106 @@ public class UserController {
 		}
 		regMsg.append("}");
 		return regMsg.toString();
+	}
+	
+	/**
+	 * 注册传感器
+	 * @param username
+	 * @param usertoken
+	 * @param session
+	 * @return
+	*/
+	@ResponseBody
+	@RequestMapping(value = "/regsensor", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+	public Object regsensor(
+			@RequestParam(value="username",required = true) String username, 
+			@RequestParam(value="usertoken",required = true) String usertoken,
+			@RequestParam(value="serialnum",required = true) String serialnum,
+			HttpSession session) {
+		StringBuilder regMsg = new StringBuilder("{\"returnmsg\":\"");
+		
+		if (username.trim().equals("") ||
+				serialnum.trim().equals("") ||
+				usertoken.trim().equals("")) {
+			regMsg.append(SensorDataStatusEnum.PI.getDisplayName());
+			regMsg.append("\"}");
+			return regMsg.toString();
+		}
+		
+		Object jusername = session.getAttribute("username");
+		Object jusertoken = session.getAttribute("usertoken");
+		
+		if (jusername == null || jusertoken == null) {
+			//session中无数据
+			regMsg.append(UserStatusEnum.UINI.getDisplayName());
+			regMsg.append("\"}");
+			return regMsg.toString();
+		}else if (jusername.equals(username) && jusertoken.equals(usertoken)) {
+			//用户数据正常,已登陆
+			regMsg.append(userService.regsensor(username, serialnum).getDisplayName());
+			regMsg.append("\"}");
+			return regMsg.toString();
+		}else {
+			regMsg.append(UserStatusEnum.PI.getDisplayName());
+			regMsg.append("\"}");
+			return regMsg.toString();
+		}
+	}
+	
+	/**
+	 * 更新用户信息
+	 * @param username
+	 * @param usertoken
+	 * @param password
+	 * @param nickname
+	 * @param phoneNum
+	 * @param session
+	 * @return
+	*/
+	@ResponseBody
+	@RequestMapping(value = "/update", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+	public Object update(
+			@RequestParam(value="username",required = true) String username, 
+			@RequestParam(value="usertoken",required = true) String usertoken,
+			String password,
+			String nickname,
+			String phoneNum,
+			HttpSession session) {
+		StringBuilder regMsg = new StringBuilder("{\"returnmsg\":\"");
+		
+		if (username.trim().equals("") ||
+			usertoken.trim().equals("")) {
+			regMsg.append(SensorDataStatusEnum.PI.getDisplayName());
+			regMsg.append("\"}");
+			return regMsg.toString();
+		}
+		
+		Object jusername = session.getAttribute("username");
+		Object jusertoken = session.getAttribute("usertoken");
+		
+		if (jusername == null || jusertoken == null) {
+			//session中无数据
+			regMsg.append(UserStatusEnum.UINI.getDisplayName());
+			regMsg.append("\"}");
+			return regMsg.toString();
+		}else if (jusername.equals(username) && jusertoken.equals(usertoken)) {
+			//用户数据正常,已登陆
+			UserEntity user = new UserEntity();
+			user.setUsername(jusername.toString());
+			user.setNickname(nickname);
+			user.setPassword(password);
+			user.setPhoneNum(phoneNum);
+			try {
+				regMsg.append(userService.updateUserMsg(user).getDisplayName());
+			} catch (Exception e) {
+				regMsg.append(UserStatusEnum.UF.getDisplayName());
+			}
+			regMsg.append("\"}");
+			return regMsg.toString();
+		}else {
+			regMsg.append(UserStatusEnum.PI.getDisplayName());
+			regMsg.append("\"}");
+			return regMsg.toString();
+		}
 	}
 }

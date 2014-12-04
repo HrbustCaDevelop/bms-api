@@ -1,9 +1,11 @@
 package com.ca.bms.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.ca.bms.entitys.SensorEntity;
 import com.ca.bms.entitys.UserEntity;
+import com.ca.bms.enumtype.SensorStatusEnum;
 import com.ca.bms.enumtype.UserStatusEnum;
 
 /**
@@ -25,7 +27,7 @@ public interface UserService {
 	 * @param user
 	 * @return
 	*/
-	UserStatusEnum userLogin(UserEntity user);
+	Map<String, Object> userLogin(UserEntity user);
 	
 	/**
 	 * 检查用户名是否存在
@@ -47,4 +49,19 @@ public interface UserService {
 	 * @return
 	*/
 	List<SensorEntity> getSensorByUsername(String username);
+	
+	/**
+	 * 注册传感器到用户
+	 * @param username
+	 * @param serialnum
+	 * @return
+	*/
+	SensorStatusEnum regsensor(String username, String serialnum);
+	
+	/**
+	 * 权限检查
+	 * @param username
+	 * @return
+	*/
+	boolean checkAuth(String username);
 }

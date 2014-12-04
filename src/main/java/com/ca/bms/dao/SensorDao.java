@@ -28,4 +28,17 @@ public interface SensorDao {
 	 * @return
 	*/
 	List<SensorEntity> getSensorByUserId(Long userid);
+	
+	/**
+	 * 通过传感器序列号获取传感器
+	 * @param serialnum
+	 * @return
+	*/
+	SensorEntity getSensorBySerialNum(String serialnum);
+	
+	/**
+	 * 更新传感器信息
+	 * @param sensorEntity
+	*/
+	void updateSensorByObject(SensorEntity sensorEntity);
 }

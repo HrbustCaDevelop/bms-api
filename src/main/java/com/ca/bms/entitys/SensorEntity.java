@@ -15,7 +15,7 @@ public class SensorEntity implements Serializable {
 	private String modifyTime;
 	private int version;
 	private String serialNum;
-	private int userId;
+	private Long userId;
 	private String sensorType;
 	public Long getId() {
 		return id;
@@ -47,10 +47,10 @@ public class SensorEntity implements Serializable {
 	public void setSerialNum(String serialNum) {
 		this.serialNum = serialNum;
 	}
-	public int getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 	public String getSensorType() {
