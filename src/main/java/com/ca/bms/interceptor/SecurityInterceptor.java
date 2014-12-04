@@ -58,7 +58,7 @@ public class SecurityInterceptor implements HandlerInterceptor {
 					response.setCharacterEncoding("UTF-8");  
 				    response.setContentType("text/html");
 				    StringBuilder regMsg = new StringBuilder("{\"returnmsg\":\"");
-				    regMsg.append(UserStatusEnum.AF.getDisplayName());
+				    regMsg.append(UserStatusEnum.UINI.getDisplayName());
 				    regMsg.append("\"}");
 				    response.getWriter().write(regMsg.toString());  
 					return false;
