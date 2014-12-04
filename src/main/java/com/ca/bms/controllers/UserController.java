@@ -18,6 +18,7 @@ import com.ca.bms.entitys.SensorEntity;
 import com.ca.bms.entitys.UserEntity;
 import com.ca.bms.enumtype.UserStatusEnum;
 import com.ca.bms.service.UserService;
+import com.ca.bms.utils.EncodeTools;
 
 /**
  * @author：刘志龙
@@ -93,7 +94,7 @@ public class UserController {
 		case LS:
 			regMsg.append(UserStatusEnum.LS.getDisplayName());
 			//登陆成功授予一个Token，防止重复登陆，用于以后请求鉴权
-			String userToken = UUID.randomUUID().toString();
+			String userToken = EncodeTools.MD5(UUID.randomUUID().toString());
 			session.setAttribute("username", user.getUsername());
 			session.setAttribute("usertoken", userToken);
 			regMsg.append("\",\"usertoken\":\"" + userToken + "\"");
