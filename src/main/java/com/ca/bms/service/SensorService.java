@@ -1,6 +1,7 @@
 package com.ca.bms.service;
 
 import com.ca.bms.entitys.SensorEntity;
+import com.ca.bms.enumtype.SensorStatusEnum;
 
 /**
  * @author：刘志龙
@@ -12,6 +13,7 @@ public interface SensorService {
 	/**
 	 * 后台添加传感器
 	 * @param sensorEntity
+	 * @return 
 	*/
-	void saveSensorByObject(SensorEntity sensorEntity);
+	SensorStatusEnum saveSensorByObject(SensorEntity sensorEntity);
 }

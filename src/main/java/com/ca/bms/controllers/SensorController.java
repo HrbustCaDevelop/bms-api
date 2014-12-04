@@ -2,7 +2,6 @@ package com.ca.bms.controllers;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,8 +24,6 @@ import com.ca.bms.service.UserService;
 @Controller
 @RequestMapping(value = "/sensor")
 public class SensorController {
-	
-private static Logger logger = Logger.getLogger(SensorController.class);
 	
 	@Autowired
 	UserService userService;
@@ -73,9 +70,7 @@ private static Logger logger = Logger.getLogger(SensorController.class);
 		}else if (jusername.equals(username) && jusertoken.equals(usertoken)) {
 			if (userService.checkAuth(username)) {
 				try {
-					sensorService.saveSensorByObject(se);
-					regMsg.append(SensorStatusEnum.SS.getDisplayName());
-					logger.info("后台添加一个传感器: " + se.toString());
+					regMsg.append(sensorService.saveSensorByObject(se).getDisplayName());
 				} catch (Exception e) {
 					regMsg.append(SensorStatusEnum.SF.getDisplayName());
 				}	

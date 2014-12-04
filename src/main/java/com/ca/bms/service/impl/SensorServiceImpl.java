@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.ca.bms.dao.SensorDao;
 import com.ca.bms.entitys.SensorEntity;
+import com.ca.bms.enumtype.SensorStatusEnum;
 import com.ca.bms.service.SensorService;
 
 /**
@@ -19,8 +20,13 @@ public class SensorServiceImpl implements SensorService {
 	SensorDao sensorDao;
 	
 	@Override
-	public void saveSensorByObject(SensorEntity sensorEntity) {
-		sensorDao.saveSensorBySensor(sensorEntity);
+	public SensorStatusEnum saveSensorByObject(SensorEntity sensorEntity) {
+		if (sensorDao.getSensorBySerialNum(sensorEntity.getSerialNum()) == null) {
+			sensorDao.saveSensorBySensor(sensorEntity);
+			return SensorStatusEnum.SS;
+		}else {
+			return SensorStatusEnum.SIE;
+		}
 	}
 
 }

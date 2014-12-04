@@ -10,6 +10,7 @@ import java.util.Map;
  */
 public enum SensorStatusEnum {
 	SIR("SENSER_IS_REGISTER", "该序列号对应传感器已经被绑定"),
+	SIE("SERIAL_IS_EXIST", "该序列号已经存在"),
 	SS("SAVE_SUCCESS", "保存成功"),
 	SF("SAVE_FAILED", "保存失败"),
 	SINE("SERIAL_IS_NOT_EXIST", "序列号无效"),
