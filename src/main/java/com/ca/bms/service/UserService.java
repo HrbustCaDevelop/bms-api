@@ -1,5 +1,8 @@
 package com.ca.bms.service;
 
+import java.util.List;
+
+import com.ca.bms.entitys.SensorEntity;
 import com.ca.bms.entitys.UserEntity;
 import com.ca.bms.enumtype.UserStatusEnum;
 
@@ -37,4 +40,11 @@ public interface UserService {
 	 * @return
 	*/
 	UserStatusEnum updateUserMsg(UserEntity user);
+	
+	/**
+	 * 获取用户的所有传感器
+	 * @param username
+	 * @return
+	*/
+	List<SensorEntity> getSensorByUsername(String username);
 }

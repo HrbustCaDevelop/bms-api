@@ -52,7 +52,9 @@
 		AND CREATE_TIME > #{timecut}
 		ORDER BY ID
 		DESC
-		LIMIT #{num}
+		<if test="num != null">
+         	LIMIT #{num}
+      	</if>
 	</select>
 	
 </mapper>

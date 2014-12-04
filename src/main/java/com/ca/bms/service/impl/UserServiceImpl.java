@@ -1,10 +1,13 @@
 package com.ca.bms.service.impl;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ca.bms.dao.UserDao;
+import com.ca.bms.entitys.SensorEntity;
 import com.ca.bms.entitys.UserEntity;
 import com.ca.bms.enumtype.UserStatusEnum;
 import com.ca.bms.service.UserService;
@@ -92,6 +95,11 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+	@Override
+	public List<SensorEntity> getSensorByUsername(String username) {
+		return userDao.getUserByUsername(username).getSensorList();
+	}
+	
 	@Override
 	public UserStatusEnum updateUserMsg(UserEntity user) {
 		return UserStatusEnum.ACBU;

@@ -1,8 +1,8 @@
 package com.ca.bms.controllers;
 
+import java.util.List;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.ca.bms.entitys.SensorEntity;
 import com.ca.bms.entitys.UserEntity;
 import com.ca.bms.enumtype.UserStatusEnum;
 import com.ca.bms.service.UserService;
@@ -132,6 +133,35 @@ public class UserController {
 		}
 		regMsg.append("\"}");
 		logger.info("User Logout: " + username);
+		return regMsg.toString();
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/mysensor", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+	public Object getMySensor(
+			@RequestParam(value="username",required = true) String username, 
+			@RequestParam(value="usertoken",required = true) String usertoken, 
+			HttpSession session) {
+		StringBuilder regMsg = new StringBuilder("{\"returnmsg\":\"");
+		Object jusername = session.getAttribute("username");
+		Object jusertoken = session.getAttribute("usertoken");
+		if (jusername == null || jusertoken == null) {
+			regMsg.append(UserStatusEnum.UINI.getDisplayName());
+		}else if (jusername.equals(username) && jusertoken.equals(usertoken)) {
+			List<SensorEntity> tempList = userService.getSensorByUsername(username);
+			if (tempList.isEmpty()) {
+				regMsg.append(UserStatusEnum.NAS.getDisplayName());
+				regMsg.append("\"");
+			}else {
+				regMsg.append(UserStatusEnum.FS.getDisplayName());
+				regMsg.append("\",\"sensor\":");
+				regMsg.append(JSON.toJSONString(tempList));
+			}
+		}else {
+			regMsg.append(UserStatusEnum.PI.getDisplayName());
+			regMsg.append("\"");
+		}
+		regMsg.append("}");
 		return regMsg.toString();
 	}
 }
