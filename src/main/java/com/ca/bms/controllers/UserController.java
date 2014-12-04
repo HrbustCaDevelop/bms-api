@@ -36,7 +36,10 @@ public class UserController {
 	private static Logger logger = Logger.getLogger(UserController.class);
 	private static SimplePropertyPreFilter userFilter = new SimplePropertyPreFilter(
 			UserEntity.class, "username", "nickname", "phoneNum");
+	private static SimplePropertyPreFilter sensorFilter = new SimplePropertyPreFilter(
+			SensorEntity.class, "modifyTime", "sensorType", "serialNum");
 
+	
 	@Autowired
 	UserService userService;
 
@@ -164,7 +167,7 @@ public class UserController {
 		} else {
 			regMsg.append(UserStatusEnum.FS.getDisplayName());
 			regMsg.append("\",\"sensor\":");
-			regMsg.append(JSON.toJSONString(tempList));
+			regMsg.append(JSON.toJSONString(tempList, sensorFilter));
 		}
 		regMsg.append("}");
 		return regMsg.toString();
