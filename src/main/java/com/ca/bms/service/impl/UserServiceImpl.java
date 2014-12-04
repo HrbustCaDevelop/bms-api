@@ -47,7 +47,6 @@ public class UserServiceImpl implements UserService {
 		}
 		if (userDao.getUserByUsername(user.getUsername()) != null) {
 			//用户名已存在
-			user.setPassword(EncodeTools.encoder(user.getPassword(),EncodeTools.giveMeSalt()));
 			return UserStatusEnum.AIE;
 		}else {
 			try {
