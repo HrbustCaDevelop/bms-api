@@ -190,14 +190,12 @@ public class UserController {
 			@RequestParam(value = "serialnum", required = true) String serialnum) {
 		StringBuilder regMsg = new StringBuilder("{\"returnmsg\":\"");
 
-		if (username.trim().equals("") || serialnum.trim().equals("")
-				|| usertoken.trim().equals("")) {
+		if (serialnum.trim().equals("")) {
 			regMsg.append(SensorDataStatusEnum.PI.getDisplayName());
 			regMsg.append("\"}");
 			return regMsg.toString();
 		}
-		regMsg.append(userService.regsensor(username, serialnum)
-				.getDisplayName());
+		regMsg.append(userService.regsensor(username, serialnum).getDisplayName());
 		regMsg.append("\"}");
 		return regMsg.toString();
 	}
