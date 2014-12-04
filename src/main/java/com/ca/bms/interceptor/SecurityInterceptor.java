@@ -13,6 +13,7 @@ import com.ca.bms.enumtype.UserStatusEnum;
 
 /**
  * 登陆权限鉴定
+ * 
  * @author：刘志龙
  * @since：2014年12月4日 下午2:31:14
  * @version:1.0
@@ -49,18 +50,22 @@ public class SecurityInterceptor implements HandlerInterceptor {
 				Object usertoken = request.getParameter("usertoken");
 				Object jusername = session.getAttribute("username");
 				Object jusertoken = session.getAttribute("usertoken");
-				if (jusername.equals(username) && jusertoken.equals(usertoken)) {
-					flag = true;
+				if (username != null && usertoken != null && jusername != null
+						&& jusertoken != null) {
+					if (jusername.equals(username) && jusertoken.equals(usertoken)) {
+						flag = true;
+					}
 				}
 				if (flag) {
 					return true;
 				} else {
-					response.setCharacterEncoding("UTF-8");  
-				    response.setContentType("text/html");
-				    StringBuilder regMsg = new StringBuilder("{\"returnmsg\":\"");
-				    regMsg.append(UserStatusEnum.UINI.getDisplayName());
-				    regMsg.append("\"}");
-				    response.getWriter().write(regMsg.toString());  
+					response.setCharacterEncoding("UTF-8");
+					response.setContentType("text/html");
+					StringBuilder regMsg = new StringBuilder(
+							"{\"returnmsg\":\"");
+					regMsg.append(UserStatusEnum.UINI.getDisplayName());
+					regMsg.append("\"}");
+					response.getWriter().write(regMsg.toString());
 					return false;
 				}
 			}

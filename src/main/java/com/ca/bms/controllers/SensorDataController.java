@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SimplePropertyPreFilter;
 import com.ca.bms.annotation.AuthPass;
 import com.ca.bms.entitys.SensorDataEntity;
 import com.ca.bms.enumtype.SensorDataStatusEnum;
@@ -27,7 +28,9 @@ import com.ca.bms.service.SensorDataService;
 public class SensorDataController {
 
 	private static Logger logger = Logger.getLogger(SensorDataController.class);
-
+	private static SimplePropertyPreFilter sensorDataFilter = new SimplePropertyPreFilter(
+			SensorDataEntity.class, "createTime", "temperature", "humidity", "co", "smoke");
+	
 	@Autowired
 	SensorDataService sensorDataService;
 
@@ -106,7 +109,7 @@ public class SensorDataController {
 			return regMsg.toString();
 		}
 		regMsg.append("\",\"data\":");
-		regMsg.append(JSON.toJSONString(sde));
+		regMsg.append(JSON.toJSONString(sde, sensorDataFilter));
 		logger.info("返回一条实时数据! :" + sde.toString());
 		regMsg.append("}");
 		return regMsg.toString();
@@ -155,7 +158,7 @@ public class SensorDataController {
 			return regMsg.toString();
 		}
 		regMsg.append("\",\"data\":");
-		regMsg.append(JSON.toJSONString(tempList));
+		regMsg.append(JSON.toJSONString(tempList, sensorDataFilter));
 		logger.info("返回一堆历史数据! :" + tempList.toString());
 		regMsg.append("}");
 		return regMsg.toString();
