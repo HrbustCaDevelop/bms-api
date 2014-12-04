@@ -13,6 +13,7 @@ public enum UserStatusEnum {
 	ACBU("ACCOUNT_CAN_BE_USE", "该用户名未注册"),
 	NAS("NO_ANY_SENSOR", "该用户尚未绑定传感器"),
 	FS("FETCH_SUCCESS", "数据获取成功"),
+	AF("AUTH_FAIL", "权限不足"),
 	RF("REGISTER_FAIL", "注册失败"), 
 	PI("PARAM_ILLEGAL", "参数错误"), 
 	RS("REGISTER_SUCCESS", "注册成功"),

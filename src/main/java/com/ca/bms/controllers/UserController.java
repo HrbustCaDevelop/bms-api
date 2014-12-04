@@ -44,7 +44,8 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/add", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
-	public Object addUser(UserEntity user) {
+	public Object addUser(UserEntity user, String phonenum) {
+		user.setPhoneNum(phonenum);
 		StringBuilder regMsg = new StringBuilder("{\"returnmsg\":\"");
 		// 拼接JSON，使用JSON返回用户添加的结果以及用户数据，用于验证用户添加是否成功
 		regMsg.append(userService.userRegister(user).getDisplayName());

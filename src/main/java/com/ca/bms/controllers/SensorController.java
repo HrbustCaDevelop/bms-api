@@ -34,6 +34,15 @@ private static Logger logger = Logger.getLogger(SensorController.class);
 	@Autowired
 	SensorService sensorService;
 	
+	/**
+	 * 后台注册传感器
+	 * @param username
+	 * @param usertoken
+	 * @param serialnum
+	 * @param sensortype
+	 * @param session
+	 * @return
+	*/
 	@ResponseBody
 	@RequestMapping(value = "/add", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	public Object getMySensor(
@@ -66,18 +75,17 @@ private static Logger logger = Logger.getLogger(SensorController.class);
 				try {
 					sensorService.saveSensorByObject(se);
 					regMsg.append(SensorStatusEnum.SS.getDisplayName());
-					regMsg.append("\"}");
 					logger.info("后台添加一个传感器: " + se.toString());
 				} catch (Exception e) {
 					regMsg.append(SensorStatusEnum.SF.getDisplayName());
-					regMsg.append("\"}");
 				}	
+			}else {
+				regMsg.append(UserStatusEnum.AF.getDisplayName());
 			}
 		}else {
 			regMsg.append(UserStatusEnum.PI.getDisplayName());
-			regMsg.append("\"");
 		}
-		regMsg.append("}");
+		regMsg.append("\"}");
 		return regMsg.toString();
 	}
 }
