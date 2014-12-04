@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SimplePropertyPreFilter;
 import com.ca.bms.entitys.SensorEntity;
 import com.ca.bms.entitys.UserEntity;
 import com.ca.bms.enumtype.SensorDataStatusEnum;
@@ -32,6 +33,7 @@ import com.ca.bms.utils.EncodeTools;
 public class UserController {
 
 	private static Logger logger = Logger.getLogger(UserController.class);
+	private static SimplePropertyPreFilter userFilter = new SimplePropertyPreFilter(UserEntity.class, "username", "nickname", "phoneNum");
 	
 	@Autowired
 	UserService userService;
@@ -50,7 +52,7 @@ public class UserController {
 		// 拼接JSON，使用JSON返回用户添加的结果以及用户数据，用于验证用户添加是否成功
 		regMsg.append(userService.userRegister(user).getDisplayName());
 		regMsg.append("\",\"userdata\":");
-		regMsg.append(JSON.toJSONString(user));
+		regMsg.append(JSON.toJSONString(user, userFilter));
 		regMsg.append("}");
 		logger.info("Receive User Add Request! :" + user.toString());
 		return regMsg.toString();
@@ -102,7 +104,7 @@ public class UserController {
 			session.setAttribute("username", user.getUsername());
 			session.setAttribute("usertoken", userToken);
 			regMsg.append("\",\"usertoken\":\"" + userToken + "\"");
-			regMsg.append(",\"userdata\":" + JSON.toJSONString((UserEntity)returnMap.get("userdata")));
+			regMsg.append(",\"userdata\":" + JSON.toJSONString((UserEntity)returnMap.get("userdata"), userFilter));
 			break;
 		default:
 			regMsg.append(UserStatusEnum.PI.getDisplayName());
