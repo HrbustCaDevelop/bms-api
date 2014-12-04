@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public enum UserStatusEnum {
 	AIE("ACCOUNT_IS_EXIST", "该用户名已经存在"),
-	ACBU("ACCOUNT_CAN_BE_USE", "该用户名可以被使用"),
+	ACBU("ACCOUNT_CAN_BE_USE", "该用户名未注册"),
 	NAS("NO_ANY_SENSOR", "该用户尚未绑定传感器"),
 	FS("FETCH_SUCCESS", "数据获取成功"),
 	RF("REGISTER_FAIL", "注册失败"), 

@@ -1,6 +1,5 @@
 package com.ca.bms.controllers;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -102,7 +101,7 @@ public class UserController {
 			session.setAttribute("username", user.getUsername());
 			session.setAttribute("usertoken", userToken);
 			regMsg.append("\",\"usertoken\":\"" + userToken + "\"");
-			regMsg.append("\",\"userdata\":\"" + JSON.toJSONString((UserEntity)returnMap.get("userdata")) + "\"");
+			regMsg.append(",\"userdata\":" + JSON.toJSONString((UserEntity)returnMap.get("userdata")));
 			break;
 		default:
 			regMsg.append(UserStatusEnum.PI.getDisplayName());

@@ -29,6 +29,18 @@
 		)
 	</insert>
 
+	<update id="updateSensorByObject" parameterType="SensorEntity">
+		UPDATE
+			bms_sensor
+		SET
+			MODIFY_TIME = CURRENT_TIMESTAMP,
+			SERIAL_NUM = #{serialNum},
+			SENSOR_TYPE = #{sensorType},
+			USER_ID = #{userId}
+		WHERE
+			ID = #{id}
+	</update>
+
 	<select id="getSensorByUserId" resultMap="SensorResultMap" parameterType="Long">
 		SELECT
 			ID,
@@ -56,17 +68,5 @@
 		WHERE
 			SERIAL_NUM=#{serialnum}
 	</select>
-	
-	<update id="updateSensorByObject" parameterType="SensorEntity">
-		UPDATE
-			bms_sensor
-		SET
-			MODIFY_TIME = CURRENT_TIMESTAMP,
-			SERIAL_NUM = #{serialNum},
-			SENSOR_TYPE = #{sensorType},
-			USER_ID = #{userId}
-		WHERE
-			ID = #{id}
-	</update>
 	
 </mapper>

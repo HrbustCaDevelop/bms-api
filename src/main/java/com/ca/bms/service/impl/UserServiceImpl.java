@@ -133,8 +133,10 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public UserStatusEnum updateUserMsg(UserEntity user) {
-		try {
+		if (user.getPassword() != null) {
 			user.setPassword(EncodeTools.encoder(user.getPassword(), EncodeTools.giveMeSalt()));
+		}
+		try {
 			userDao.updateUserByUser(user);
 			return UserStatusEnum.US;
 		} catch (Exception e) {

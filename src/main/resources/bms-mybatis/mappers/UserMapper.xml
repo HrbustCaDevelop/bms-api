@@ -37,6 +37,24 @@
 		)
 	</insert>
 
+	<update id="updateUserByUser" parameterType="UserEntity">
+		UPDATE
+			bms_user
+		SET
+			MODIFY_TIME = CURRENT_TIMESTAMP
+			<if test="password != null">
+         		,PASSWORD = #{password}
+      		</if>
+      		<if test="nickname != null">
+         		,NICKNAME = #{nickname}
+      		</if>
+      		<if test="phoneNum != null">
+         		,PHONE_NUM = #{phoneNum}
+      		</if>
+		WHERE
+			USERNAME = #{username}
+	</update>
+
 	<select id="getUserByUsername" resultMap="UserResultMap"
 		parameterType="string">
 		SELECT
@@ -72,21 +90,5 @@
 		AND
 			PASSWORD=#{password}
 	</select>
-	
-	<update id="updateUserByUser" parameterType="UserEntity">
-		UPDATE
-			bms_user
-		SET
-			MODIFY_TIME = CURRENT_TIMESTAMP,
-			PASSWORD = #{password}
-      		<if test="nickname != null">
-         		,NICKNAME = #{nickname}
-      		</if>
-      		<if test="phoneNum != null">
-         		,PHONE_NUM = #{phoneNum}
-      		</if>
-		WHERE
-			USERNAME = #{username}
-	</update>
 	
 </mapper>
