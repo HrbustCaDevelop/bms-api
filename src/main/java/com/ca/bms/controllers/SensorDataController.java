@@ -1,8 +1,8 @@
 package com.ca.bms.controllers;
 
 import java.text.ParseException;
+import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -88,7 +88,7 @@ public class SensorDataController {
 		if (username.trim().equals("") ||
 				serialnum.trim().equals("") ||
 				usertoken.trim().equals("")) {
-			regMsg.append(SensorDataStatusEnum.PI);
+			regMsg.append(SensorDataStatusEnum.PI.getDisplayName());
 			regMsg.append("\"}");
 			return regMsg.toString();
 		}
@@ -102,7 +102,7 @@ public class SensorDataController {
 			regMsg.append("\"}");
 			return regMsg.toString();
 		}else if (jusername.equals(username) && jusertoken.equals(usertoken)) {
-			//用户数据正常
+			//用户数据正常,已登陆
 			SensorDataEntity sde = null;
 			try {
 				sde = sensorDataService.getRealTimeDataBySerialNum(serialnum);
@@ -121,6 +121,61 @@ public class SensorDataController {
 			regMsg.append("\",\"data\":");
 			regMsg.append(JSON.toJSONString(sde));
 			logger.info("返回一条实时数据! :" + sde.toString());
+			regMsg.append("}");
+			return regMsg.toString();
+		}else {
+			regMsg.append(UserStatusEnum.PI.getDisplayName());
+			regMsg.append("\"}");
+			return regMsg.toString();
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/history", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+	public Object getHistorySensorData(
+			@RequestParam(value="username",required = true) String username,
+			@RequestParam(value="serialnum",required = true) String serialnum,
+			@RequestParam(value="usertoken",required = true) String usertoken,
+			@RequestParam(value="timestamp",required = true) String timestamp,
+			HttpSession session) {
+		StringBuilder regMsg = new StringBuilder("{\"returnmsg\":\"");
+		
+		if (username.trim().equals("") ||
+			serialnum.trim().equals("") ||
+			usertoken.trim().equals("") ||
+			timestamp.trim().equals("")) {
+			regMsg.append(SensorDataStatusEnum.PI.getDisplayName());
+			regMsg.append("\"}");
+			return regMsg.toString();
+		}
+		
+		Object jusername = session.getAttribute("username");
+		Object jusertoken = session.getAttribute("usertoken");
+		
+		if (jusername == null || jusertoken == null) {
+			//session中无数据
+			regMsg.append(UserStatusEnum.UINI.getDisplayName());
+			regMsg.append("\"}");
+			return regMsg.toString();
+		}else if (jusername.equals(username) && jusertoken.equals(usertoken)) {
+			List<SensorDataEntity> tempList = null;
+			try {
+				tempList = sensorDataService.getHistoryDataBySerialNum(timestamp, serialnum);
+				if (tempList == null) {
+					regMsg.append(SensorDataStatusEnum.PI.getDisplayName());
+					regMsg.append("\"}");
+					return regMsg.toString();
+				}else {
+					regMsg.append(SensorDataStatusEnum.DFS.getDisplayName());
+				}
+			} catch (ParseException e) {
+				regMsg.append(SensorDataStatusEnum.PI.getDisplayName());
+				regMsg.append("\"}");
+				return regMsg.toString();
+			}
+			regMsg.append("\",\"data\":");
+			regMsg.append(JSON.toJSONString(tempList));
+			logger.info("返回一堆历史数据! :" + tempList.toString());
 			regMsg.append("}");
 			return regMsg.toString();
 		}else {

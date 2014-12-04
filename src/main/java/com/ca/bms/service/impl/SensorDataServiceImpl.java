@@ -3,6 +3,7 @@ package com.ca.bms.service.impl;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,9 +54,23 @@ public class SensorDataServiceImpl implements SensorDataService {
 	@Override
 	public SensorDataEntity getRealTimeDataBySerialNum(String serialNum) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
-		Date temp = sdf.parse("1000-01-01 01:01:01");  
-	    sdf.format(temp);  
-		return sensorDataDao.getSensorDataBySensorUUIDAndDatetime(serialNum, temp, 1);
+		Date temp = sdf.parse("1000-01-01 01:01:01");
+		List<SensorDataEntity> tempList =  sensorDataDao.getSensorDataBySensorUUIDAndDatetime(serialNum, temp, 1);
+		if (tempList.isEmpty()) {
+			return null;
+		}else {
+			return tempList.get(0);
+		}
+		
+	}
+
+	@Override
+	public List<SensorDataEntity> getHistoryDataBySerialNum(String timastamp,
+			String serialNum) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+		Date temp = sdf.parse(timastamp);
+		List<SensorDataEntity> tempList =  sensorDataDao.getSensorDataBySensorUUIDAndDatetime(serialNum, temp, null);
+		return tempList.isEmpty()?null:tempList;
 	}
 
 }

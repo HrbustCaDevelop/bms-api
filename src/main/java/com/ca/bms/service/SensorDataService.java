@@ -1,6 +1,7 @@
 package com.ca.bms.service;
 
 import java.text.ParseException;
+import java.util.List;
 
 import com.ca.bms.entitys.SensorDataEntity;
 import com.ca.bms.enumtype.SensorDataStatusEnum;
@@ -25,4 +26,12 @@ public interface SensorDataService {
 	 * @throws ParseException 
 	*/
 	SensorDataEntity getRealTimeDataBySerialNum(String serialNum) throws ParseException;
+	
+	/**
+	 * 获取传感器历史数据
+	 * @param serialNum
+	 * @return
+	 * @throws ParseException
+	*/
+	List<SensorDataEntity> getHistoryDataBySerialNum(String timastamp, String serialNum) throws ParseException;
 }
