@@ -16,6 +16,14 @@
 	</properties>
 
 	<dependencies>
+	
+		<!-- BMS-COMMON -->
+		<dependency>
+			<groupId>com.ca</groupId>
+			<artifactId>bms-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		
 		<!-- Mybatis begin -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
