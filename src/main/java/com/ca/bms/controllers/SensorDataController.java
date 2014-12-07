@@ -29,7 +29,7 @@ public class SensorDataController {
 
 	private static Logger logger = Logger.getLogger(SensorDataController.class);
 	private static SimplePropertyPreFilter sensorDataFilter = new SimplePropertyPreFilter(
-			SensorDataEntity.class, "createTime", "temperature", "humidity", "co", "smoke");
+			SensorDataEntity.class, "createTime", "temperature", "humidity", "co", "smoke", "sensorAddr");
 	
 	@Autowired
 	SensorDataService sensorDataService;

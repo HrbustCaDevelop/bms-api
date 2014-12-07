@@ -47,7 +47,8 @@ public class SensorController {
 			@RequestParam(value = "username", required = true) String username,
 			@RequestParam(value = "usertoken", required = true) String usertoken,
 			@RequestParam(value = "serialnum", required = true) String serialnum,
-			@RequestParam(value = "sensortype", required = true) String sensortype) {
+			@RequestParam(value = "sensortype", required = true) String sensortype,
+			@RequestParam(value = "sensoraddr", required = true) String sensoraddr) {
 		StringBuilder regMsg = new StringBuilder("{\"returnmsg\":\"");
 
 		if (serialnum.trim().equals("") || sensortype.trim().equals("")) {
@@ -59,6 +60,7 @@ public class SensorController {
 		SensorEntity se = new SensorEntity();
 		se.setSerialNum(serialnum);
 		se.setSensorType(sensortype);
+		se.setSensorAddr(sensoraddr);
 		if (userService.checkAuth(username)) {
 			try {
 				regMsg.append(sensorService.saveSensorByObject(se)

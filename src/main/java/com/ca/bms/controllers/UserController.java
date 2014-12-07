@@ -37,7 +37,7 @@ public class UserController {
 	private static SimplePropertyPreFilter userFilter = new SimplePropertyPreFilter(
 			UserEntity.class, "username", "nickname", "phoneNum");
 	private static SimplePropertyPreFilter sensorFilter = new SimplePropertyPreFilter(
-			SensorEntity.class, "modifyTime", "sensorType", "serialNum");
+			SensorEntity.class, "modifyTime", "sensorType", "serialNum", "sensorAddr");
 
 	
 	@Autowired

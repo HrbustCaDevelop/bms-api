@@ -12,6 +12,7 @@
 		<result column="SERIAL_NUM" property="serialNum" jdbcType="VARCHAR" />
 		<result column="USER_ID" property="userId" jdbcType="BIGINT" />
 		<result column="SENSOR_TYPE" property="sensorType" jdbcType="VARCHAR" />
+		<result column="SENSOR_ADDR" property="sensorAddr" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<insert id="saveSensorBySensor" parameterType="SensorEntity" useGeneratedKeys="true" keyProperty="id">
@@ -19,13 +20,15 @@
 		(
 			CREATE_TIME,
 			SERIAL_NUM,
-			SENSOR_TYPE
+			SENSOR_TYPE,
+			SENSOR_ADDR
 		)
 		VALUES
 		(
 			CURRENT_TIMESTAMP,
 			#{serialNum, jdbcType=VARCHAR},
-			#{sensorType, jdbcType=VARCHAR}
+			#{sensorType, jdbcType=VARCHAR},
+			#{sensorAddr, jdbcType=VARCHAR}
 		)
 	</insert>
 
@@ -34,8 +37,6 @@
 			bms_sensor
 		SET
 			MODIFY_TIME = CURRENT_TIMESTAMP,
-			SERIAL_NUM = #{serialNum},
-			SENSOR_TYPE = #{sensorType},
 			USER_ID = #{userId}
 		WHERE
 			ID = #{id}
@@ -49,8 +50,10 @@
 			VERSION,
 			SERIAL_NUM,
 			SENSOR_TYPE,
+			SENSOR_ADDR,
 			USER_ID
-		FROM bms_sensor
+		FROM
+			bms_sensor
 		WHERE
 			USER_ID=#{userid}
 	</select>
@@ -63,6 +66,7 @@
 			VERSION,
 			SERIAL_NUM,
 			SENSOR_TYPE,
+			SENSOR_ADDR,
 			USER_ID
 		FROM bms_sensor
 		WHERE
