@@ -52,7 +52,7 @@ public class SensorController {
 		StringBuilder regMsg = new StringBuilder("{\"returnmsg\":\"");
 
 		if (serialnum.trim().equals("") || sensortype.trim().equals("")) {
-			regMsg.append(SensorDataStatusEnum.PI.getDisplayName());
+			regMsg.append(SensorDataStatusEnum.PI.getValue());
 			regMsg.append("\"}");
 			return regMsg.toString();
 		}
@@ -66,10 +66,10 @@ public class SensorController {
 				regMsg.append(sensorService.saveSensorByObject(se)
 						.getDisplayName());
 			} catch (Exception e) {
-				regMsg.append(SensorStatusEnum.SF.getDisplayName());
+				regMsg.append(SensorStatusEnum.SF.getValue());
 			}
 		} else {
-			regMsg.append(UserStatusEnum.AF.getDisplayName());
+			regMsg.append(UserStatusEnum.AF.getValue());
 		}
 		regMsg.append("\"}");
 		return regMsg.toString();

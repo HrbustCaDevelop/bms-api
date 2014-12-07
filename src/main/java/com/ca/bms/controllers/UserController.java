@@ -55,7 +55,7 @@ public class UserController {
 		user.setPhoneNum(phonenum);
 		StringBuilder regMsg = new StringBuilder("{\"returnmsg\":\"");
 		// 拼接JSON，使用JSON返回用户添加的结果以及用户数据，用于验证用户添加是否成功
-		regMsg.append(userService.userRegister(user).getDisplayName());
+		regMsg.append(userService.userRegister(user).getValue());
 		regMsg.append("\",\"userdata\":");
 		regMsg.append(JSON.toJSONString(user, userFilter));
 		regMsg.append("}");
@@ -73,7 +73,7 @@ public class UserController {
 	@RequestMapping(value = "/checkusername", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	public Object checkUsername(String username) {
 		StringBuilder regMsg = new StringBuilder("{\"returnmsg\":\"");
-		regMsg.append(userService.checkUsername(username).getDisplayName());
+		regMsg.append(userService.checkUsername(username).getValue());
 		regMsg.append("\",\"username\":");
 		regMsg.append("\"" + username + "\"");
 		regMsg.append("}");
@@ -95,15 +95,15 @@ public class UserController {
 		Map<String, Object> returnMap = userService.userLogin(user);
 		switch ((UserStatusEnum) returnMap.get("status")) {
 		case PI:
-			regMsg.append(UserStatusEnum.PI.getDisplayName());
+			regMsg.append(UserStatusEnum.PI.getValue());
 			regMsg.append("\",\"usertoken\":\"null\"");
 			break;
 		case LF:
-			regMsg.append(UserStatusEnum.LF.getDisplayName());
+			regMsg.append(UserStatusEnum.LF.getValue());
 			regMsg.append("\",\"usertoken\":\"null\"");
 			break;
 		case LS:
-			regMsg.append(UserStatusEnum.LS.getDisplayName());
+			regMsg.append(UserStatusEnum.LS.getValue());
 			// 登陆成功授予一个Token，防止重复登陆，用于以后请求鉴权
 			String userToken = EncodeTools.MD5(UUID.randomUUID().toString());
 			session.setAttribute("username", user.getUsername());
@@ -114,7 +114,7 @@ public class UserController {
 							userFilter));
 			break;
 		default:
-			regMsg.append(UserStatusEnum.PI.getDisplayName());
+			regMsg.append(UserStatusEnum.PI.getValue());
 			regMsg.append("\",\"usertoken\":\"null\"");
 			break;
 		}
@@ -139,7 +139,7 @@ public class UserController {
 		StringBuilder regMsg = new StringBuilder("{\"returnmsg\":\"");
 		session.removeAttribute("username");
 		session.removeAttribute("usertoken");
-		regMsg.append(UserStatusEnum.UILO.getDisplayName());
+		regMsg.append(UserStatusEnum.UILO.getValue());
 		regMsg.append("\"}");
 		logger.info("User Logout: " + username);
 		return regMsg.toString();
@@ -162,10 +162,10 @@ public class UserController {
 		StringBuilder regMsg = new StringBuilder("{\"returnmsg\":\"");
 		List<SensorEntity> tempList = userService.getSensorByUsername(username);
 		if (tempList.isEmpty()) {
-			regMsg.append(UserStatusEnum.NAS.getDisplayName());
+			regMsg.append(UserStatusEnum.NAS.getValue());
 			regMsg.append("\"");
 		} else {
-			regMsg.append(UserStatusEnum.FS.getDisplayName());
+			regMsg.append(UserStatusEnum.FS.getValue());
 			regMsg.append("\",\"sensor\":");
 			regMsg.append(JSON.toJSONString(tempList, sensorFilter));
 		}
@@ -224,9 +224,9 @@ public class UserController {
 			user.setPassword(password);
 			user.setPhoneNum(phoneNum);
 			try {
-				regMsg.append(userService.updateUserMsg(user).getDisplayName());
+				regMsg.append(userService.updateUserMsg(user).getValue());
 			} catch (Exception e) {
-				regMsg.append(UserStatusEnum.UF.getDisplayName());
+				regMsg.append(UserStatusEnum.UF.getValue());
 			}
 			regMsg.append("\"}");
 			return regMsg.toString();

@@ -54,7 +54,7 @@ public class SensorDataController {
 			@RequestParam(value = "serialnum", required = true) String serialnum) {
 		StringBuilder regMsg = new StringBuilder("{\"returnmsg\":\"");
 		if (serialnum.trim().equals("")) {
-			regMsg.append(SensorDataStatusEnum.PI);
+			regMsg.append(SensorDataStatusEnum.PI.getValue());
 			regMsg.append("\"}");
 			return regMsg.toString();
 		}
@@ -65,7 +65,7 @@ public class SensorDataController {
 		sensorDataEntity.setSmoke(smoke);
 		sensorDataEntity.setSerialNum(serialnum);
 		regMsg.append(sensorDataService.savaSensorData(sensorDataEntity)
-				.getDisplayName());
+				.getValue());
 		regMsg.append("\"}");
 		logger.info("Receive User Add Request! :" + sensorDataEntity.toString());
 		return regMsg.toString();
@@ -89,7 +89,7 @@ public class SensorDataController {
 			@RequestParam(value = "usertoken", required = true) String usertoken) {
 		StringBuilder regMsg = new StringBuilder("{\"returnmsg\":\"");
 		if (serialnum.trim().equals("")) {
-			regMsg.append(SensorDataStatusEnum.PI.getDisplayName());
+			regMsg.append(SensorDataStatusEnum.PI.getValue());
 			regMsg.append("\"}");
 			return regMsg.toString();
 		}
@@ -97,14 +97,14 @@ public class SensorDataController {
 		try {
 			sde = sensorDataService.getRealTimeDataBySerialNum(serialnum);
 			if (sde == null) {
-				regMsg.append(SensorDataStatusEnum.PI.getDisplayName());
+				regMsg.append(SensorDataStatusEnum.PI.getValue());
 				regMsg.append("\"}");
 				return regMsg.toString();
 			} else {
-				regMsg.append(SensorDataStatusEnum.DFS.getDisplayName());
+				regMsg.append(SensorDataStatusEnum.DFS.getValue());
 			}
 		} catch (ParseException e) {
-			regMsg.append(SensorDataStatusEnum.PI.getDisplayName());
+			regMsg.append(SensorDataStatusEnum.PI.getValue());
 			regMsg.append("\"}");
 			return regMsg.toString();
 		}
@@ -136,7 +136,7 @@ public class SensorDataController {
 		StringBuilder regMsg = new StringBuilder("{\"returnmsg\":\"");
 
 		if (serialnum.trim().equals("") || timestamp.trim().equals("")) {
-			regMsg.append(SensorDataStatusEnum.PI.getDisplayName());
+			regMsg.append(SensorDataStatusEnum.PI.getValue());
 			regMsg.append("\"}");
 			return regMsg.toString();
 		}
@@ -146,14 +146,14 @@ public class SensorDataController {
 			tempList = sensorDataService.getHistoryDataBySerialNum(timestamp,
 					serialnum);
 			if (tempList == null) {
-				regMsg.append(SensorDataStatusEnum.PI.getDisplayName());
+				regMsg.append(SensorDataStatusEnum.PI.getValue());
 				regMsg.append("\"}");
 				return regMsg.toString();
 			} else {
-				regMsg.append(SensorDataStatusEnum.DFS.getDisplayName());
+				regMsg.append(SensorDataStatusEnum.DFS.getValue());
 			}
 		} catch (ParseException e) {
-			regMsg.append(SensorDataStatusEnum.PI.getDisplayName());
+			regMsg.append(SensorDataStatusEnum.PI.getValue());
 			regMsg.append("\"}");
 			return regMsg.toString();
 		}
