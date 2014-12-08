@@ -71,7 +71,7 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/checkusername", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
-	public Object checkUsername(String username) {
+	public Object checkUsername(@RequestParam(value = "username", required = true)String username) {
 		StringBuilder regMsg = new StringBuilder("{\"returnmsg\":\"");
 		regMsg.append(userService.checkUsername(username).getValue());
 		regMsg.append("\",\"username\":");

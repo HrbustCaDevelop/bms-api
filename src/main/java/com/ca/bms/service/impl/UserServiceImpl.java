@@ -94,7 +94,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public UserStatusEnum checkUsername(String username) {
-		if (username.trim().equals("") || null == username) {
+		if (username.trim().equals("")) {
 			return UserStatusEnum.PI;
 		}
 		if (userDao.getUserByUsername(username) != null) {
