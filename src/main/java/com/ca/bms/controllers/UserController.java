@@ -217,12 +217,12 @@ public class UserController {
 	public Object update(
 			@RequestParam(value = "username", required = true) String username,
 			@RequestParam(value = "usertoken", required = true) String usertoken,
-			String password, String nickname, String phoneNum) {
+			String password, String nickname, String phonenum) {
 		StringBuilder regMsg = new StringBuilder("{\"returnmsg\":\"");
 			UserEntity user = new UserEntity();
 			user.setNickname(nickname);
 			user.setPassword(password);
-			user.setPhoneNum(phoneNum);
+			user.setPhoneNum(phonenum);
 			try {
 				regMsg.append(userService.updateUserMsg(user).getValue());
 			} catch (Exception e) {
