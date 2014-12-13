@@ -2,7 +2,6 @@ package com.ca.bms.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -10,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ca.bms.annotation.AuthPass;
 import com.ca.bms.enumtype.UserStatusEnum;
+import com.ca.bms.utils.RedisUtils;
 
 /**
  * 登陆权限鉴定
@@ -45,14 +45,11 @@ public class SecurityInterceptor implements HandlerInterceptor {
 			if (authPass == null || authPass.validate() == false)
 				return true;
 			else {
-				HttpSession session = request.getSession();
 				Object username = request.getParameter("username");
 				Object usertoken = request.getParameter("usertoken");
-				Object jusername = session.getAttribute("username");
-				Object jusertoken = session.getAttribute("usertoken");
-				if (username != null && usertoken != null && jusername != null
-						&& jusertoken != null) {
-					if (jusername.equals(username) && jusertoken.equals(usertoken)) {
+				if (username != null && usertoken != null) {
+					String jusertoken = RedisUtils.get(username.toString());
+					if (usertoken.equals(jusertoken)) {
 						flag = true;
 					}
 				}
