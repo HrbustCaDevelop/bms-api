@@ -23,6 +23,7 @@ import com.ca.bms.enumtype.SensorDataStatusEnum;
 import com.ca.bms.enumtype.UserStatusEnum;
 import com.ca.bms.service.UserService;
 import com.ca.bms.utils.EncodeTools;
+import com.ca.bms.utils.RedisUtils;
 
 /**
  * @author：刘志龙
@@ -37,9 +38,9 @@ public class UserController {
 	private static SimplePropertyPreFilter userFilter = new SimplePropertyPreFilter(
 			UserEntity.class, "username", "nickname", "phoneNum");
 	private static SimplePropertyPreFilter sensorFilter = new SimplePropertyPreFilter(
-			SensorEntity.class, "modifyTime", "sensorType", "serialNum", "sensorAddr");
+			SensorEntity.class, "modifyTime", "sensorType", "serialNum",
+			"sensorAddr");
 
-	
 	@Autowired
 	UserService userService;
 
@@ -71,7 +72,8 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/checkusername", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
-	public Object checkUsername(@RequestParam(value = "username", required = true)String username) {
+	public Object checkUsername(
+			@RequestParam(value = "username", required = true) String username) {
 		StringBuilder regMsg = new StringBuilder("{\"returnmsg\":\"");
 		regMsg.append(userService.checkUsername(username).getValue());
 		regMsg.append("\",\"username\":");
@@ -89,7 +91,7 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
-	public Object login(UserEntity user, HttpSession session) {
+	public Object login(UserEntity user) {
 		StringBuilder regMsg = new StringBuilder("{\"returnmsg\":\"");
 		logger.info("Receive User Login Request! :" + user.toString());
 		Map<String, Object> returnMap = userService.userLogin(user);
@@ -106,8 +108,7 @@ public class UserController {
 			regMsg.append(UserStatusEnum.LS.getValue());
 			// 登陆成功授予一个Token，防止重复登陆，用于以后请求鉴权
 			String userToken = EncodeTools.MD5(UUID.randomUUID().toString());
-			session.setAttribute("username", user.getUsername());
-			session.setAttribute("usertoken", userToken);
+			RedisUtils.put(user.getUsername(), userToken);
 			regMsg.append("\",\"usertoken\":\"" + userToken + "\"");
 			regMsg.append(",\"userdata\":"
 					+ JSON.toJSONString((UserEntity) returnMap.get("userdata"),
@@ -134,11 +135,9 @@ public class UserController {
 	@RequestMapping(value = "/logout", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	public Object logout(
 			@RequestParam(value = "username", required = true) String username,
-			@RequestParam(value = "usertoken", required = true) String usertoken,
-			HttpSession session) {
+			@RequestParam(value = "usertoken", required = true) String usertoken) {
 		StringBuilder regMsg = new StringBuilder("{\"returnmsg\":\"");
-		session.removeAttribute("username");
-		session.removeAttribute("usertoken");
+		RedisUtils.remove(username);
 		regMsg.append(UserStatusEnum.UILO.getValue());
 		regMsg.append("\"}");
 		logger.info("User Logout: " + username);
@@ -195,7 +194,8 @@ public class UserController {
 			regMsg.append("\"}");
 			return regMsg.toString();
 		}
-		regMsg.append(userService.regsensor(username, serialnum).getDisplayName());
+		regMsg.append(userService.regsensor(username, serialnum)
+				.getDisplayName());
 		regMsg.append("\"}");
 		return regMsg.toString();
 	}
@@ -219,16 +219,16 @@ public class UserController {
 			@RequestParam(value = "usertoken", required = true) String usertoken,
 			String password, String nickname, String phonenum) {
 		StringBuilder regMsg = new StringBuilder("{\"returnmsg\":\"");
-			UserEntity user = new UserEntity();
-			user.setNickname(nickname);
-			user.setPassword(password);
-			user.setPhoneNum(phonenum);
-			try {
-				regMsg.append(userService.updateUserMsg(user).getValue());
-			} catch (Exception e) {
-				regMsg.append(UserStatusEnum.UF.getValue());
-			}
-			regMsg.append("\"}");
-			return regMsg.toString();
+		UserEntity user = new UserEntity();
+		user.setNickname(nickname);
+		user.setPassword(password);
+		user.setPhoneNum(phonenum);
+		try {
+			regMsg.append(userService.updateUserMsg(user).getValue());
+		} catch (Exception e) {
+			regMsg.append(UserStatusEnum.UF.getValue());
+		}
+		regMsg.append("\"}");
+		return regMsg.toString();
 	}
 }
