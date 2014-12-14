@@ -17,18 +17,7 @@ public class RedisUtils {
 		config.setMaxIdle(200);
 		config.setTestOnBorrow(true);
 		config.setTestOnReturn(true);
-		pool = new JedisPool(config, "222.27.196.5", 12221);
-	}
-
-	/**
-	 * 获取一个Jedis事例，顺手认证一下
-	 * 
-	 * @return
-	 */
-	private static Jedis newInstance() {
-		Jedis jedis = pool.getResource();
-		jedis.auth("Zj4xyBkgjd.");
-		return jedis;
+		pool = new JedisPool(config, "222.27.196.5", 12221, 2000, "Zj4xyBkgjd.");
 	}
 
 	/**
@@ -37,7 +26,7 @@ public class RedisUtils {
 	 * @param key
 	 */
 	public static void remove(String key) {
-		Jedis jedis = newInstance();
+		Jedis jedis = pool.getResource();
 		try {
 			jedis.del(key);
 		} finally {
@@ -51,7 +40,7 @@ public class RedisUtils {
 	 * @param key
 	 */
 	public static String get(String key) {
-		Jedis jedis = newInstance();
+		Jedis jedis = pool.getResource();
 		try {
 			return jedis.get(key);
 		} finally {
@@ -66,7 +55,7 @@ public class RedisUtils {
 	 * @param value
 	 */
 	public static void put(String key, String value) {
-		Jedis jedis = newInstance();
+		Jedis jedis = pool.getResource();
 		try {
 			jedis.set(key, value);
 		} finally {
