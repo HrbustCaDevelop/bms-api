@@ -183,6 +183,6 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>bms</finalName>
+		<finalName>bms-api</finalName>
 	</build>
 </project>
