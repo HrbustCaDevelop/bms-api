@@ -1,4 +1,4 @@
-package com.ca.bms.controllers;
+package com.ca.bms.api.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ca.bms.annotation.AuthPass;
-import com.ca.bms.entitys.SensorEntity;
-import com.ca.bms.enumtype.SensorDataStatusEnum;
-import com.ca.bms.enumtype.SensorStatusEnum;
-import com.ca.bms.enumtype.UserStatusEnum;
-import com.ca.bms.service.SensorService;
-import com.ca.bms.service.UserService;
+import com.ca.bms.api.annotation.AuthPass;
+import com.ca.bms.api.service.SensorService;
+import com.ca.bms.api.service.UserService;
+import com.ca.bms.common.entitys.SensorEntity;
+import com.ca.bms.common.enumtype.SensorDataStatusEnum;
+import com.ca.bms.common.enumtype.SensorStatusEnum;
+import com.ca.bms.common.enumtype.UserStatusEnum;
 
 /**
  * @author：刘志龙

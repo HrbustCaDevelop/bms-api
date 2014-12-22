@@ -1,6 +1,6 @@
-package com.ca.bms.dao;
+package com.ca.bms.api.dao;
 
-import com.ca.bms.entitys.UserEntity;
+import com.ca.bms.common.entitys.UserEntity;
 
 /**
  * 用户dao操作

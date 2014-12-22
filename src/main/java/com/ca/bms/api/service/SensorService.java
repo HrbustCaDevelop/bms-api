@@ -1,7 +1,7 @@
-package com.ca.bms.service;
+package com.ca.bms.api.service;
 
-import com.ca.bms.entitys.SensorEntity;
-import com.ca.bms.enumtype.SensorStatusEnum;
+import com.ca.bms.common.entitys.SensorEntity;
+import com.ca.bms.common.enumtype.SensorStatusEnum;
 
 /**
  * @author：刘志龙

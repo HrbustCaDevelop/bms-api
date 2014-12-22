@@ -1,4 +1,4 @@
-package com.ca.bms.utils;
+package com.ca.bms.api.utils;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -17,7 +17,7 @@ public class RedisUtils {
 		config.setMaxIdle(200);
 		config.setTestOnBorrow(true);
 		config.setTestOnReturn(true);
-		pool = new JedisPool(config, "222.27.196.5", 12221, 2000, "Zj4xyBkgjd.");
+		pool = new JedisPool(config, "121.42.140.165", 12221, 2000, "Zj4xyBkgjd.");
 	}
 
 	/**

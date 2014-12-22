@@ -1,12 +1,12 @@
-package com.ca.bms.service;
+package com.ca.bms.api.service;
 
 import java.util.List;
 import java.util.Map;
 
-import com.ca.bms.entitys.SensorEntity;
-import com.ca.bms.entitys.UserEntity;
-import com.ca.bms.enumtype.SensorStatusEnum;
-import com.ca.bms.enumtype.UserStatusEnum;
+import com.ca.bms.common.entitys.SensorEntity;
+import com.ca.bms.common.entitys.UserEntity;
+import com.ca.bms.common.enumtype.SensorStatusEnum;
+import com.ca.bms.common.enumtype.UserStatusEnum;
 
 /**
  * @author：刘志龙

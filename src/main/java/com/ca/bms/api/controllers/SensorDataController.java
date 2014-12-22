@@ -1,4 +1,4 @@
-package com.ca.bms.controllers;
+package com.ca.bms.api.controllers;
 
 import java.text.ParseException;
 import java.util.List;
@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SimplePropertyPreFilter;
-import com.ca.bms.annotation.AuthPass;
-import com.ca.bms.entitys.SensorDataEntity;
-import com.ca.bms.enumtype.SensorDataStatusEnum;
-import com.ca.bms.service.SensorDataService;
+import com.ca.bms.api.annotation.AuthPass;
+import com.ca.bms.api.service.SensorDataService;
+import com.ca.bms.common.entitys.SensorDataEntity;
+import com.ca.bms.common.enumtype.SensorDataStatusEnum;
 
 /**
  * @author：刘志龙

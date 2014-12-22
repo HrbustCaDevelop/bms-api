@@ -1,11 +1,11 @@
-package com.ca.bms.dao;
+package com.ca.bms.api.dao;
 
 import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.ca.bms.entitys.SensorDataEntity;
+import com.ca.bms.common.entitys.SensorDataEntity;
 
 /**
  * 传感器数据Dao

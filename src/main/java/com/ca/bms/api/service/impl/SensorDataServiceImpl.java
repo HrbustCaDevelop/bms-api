@@ -1,4 +1,4 @@
-package com.ca.bms.service.impl;
+package com.ca.bms.api.service.impl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,10 +9,10 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ca.bms.dao.SensorDataDao;
-import com.ca.bms.entitys.SensorDataEntity;
-import com.ca.bms.enumtype.SensorDataStatusEnum;
-import com.ca.bms.service.SensorDataService;
+import com.ca.bms.api.dao.SensorDataDao;
+import com.ca.bms.api.service.SensorDataService;
+import com.ca.bms.common.entitys.SensorDataEntity;
+import com.ca.bms.common.enumtype.SensorDataStatusEnum;
 
 /**
  * @author：刘志龙

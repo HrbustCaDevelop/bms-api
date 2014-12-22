@@ -1,4 +1,4 @@
-package com.ca.bms.controllers;
+package com.ca.bms.api.controllers;
 
 import java.util.List;
 import java.util.Map;
@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SimplePropertyPreFilter;
-import com.ca.bms.annotation.AuthPass;
-import com.ca.bms.entitys.SensorEntity;
-import com.ca.bms.entitys.UserEntity;
-import com.ca.bms.enumtype.SensorDataStatusEnum;
-import com.ca.bms.enumtype.UserStatusEnum;
-import com.ca.bms.service.UserService;
-import com.ca.bms.utils.EncodeTools;
-import com.ca.bms.utils.RedisUtils;
+import com.ca.bms.api.annotation.AuthPass;
+import com.ca.bms.api.service.UserService;
+import com.ca.bms.api.utils.EncodeTools;
+import com.ca.bms.api.utils.RedisUtils;
+import com.ca.bms.common.entitys.SensorEntity;
+import com.ca.bms.common.entitys.UserEntity;
+import com.ca.bms.common.enumtype.SensorDataStatusEnum;
+import com.ca.bms.common.enumtype.UserStatusEnum;
 
 /**
  * @author：刘志龙

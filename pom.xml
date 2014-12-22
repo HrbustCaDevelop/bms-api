@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.hrbusr</groupId>
-	<artifactId>bms</artifactId>
+	<groupId>com.ca.bms</groupId>
+	<artifactId>api</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>bms</name>
+	<version>1.0.1</version>
+	<name>api</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -26,9 +26,9 @@
 
 		<!-- BMS-COMMON -->
 		<dependency>
-			<groupId>com.ca</groupId>
-			<artifactId>bms-common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<groupId>com.ca.bms</groupId>
+			<artifactId>common</artifactId>
+			<version>0.0.1</version>
 		</dependency>
 
 		<!-- Mybatis begin -->
@@ -183,6 +183,6 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>bms-api</finalName>
+		<finalName>api</finalName>
 	</build>
 </project>

@@ -1,4 +1,4 @@
-package com.ca.bms.service.impl;
+package com.ca.bms.api.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,14 +8,14 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ca.bms.dao.SensorDao;
-import com.ca.bms.dao.UserDao;
-import com.ca.bms.entitys.SensorEntity;
-import com.ca.bms.entitys.UserEntity;
-import com.ca.bms.enumtype.SensorStatusEnum;
-import com.ca.bms.enumtype.UserStatusEnum;
-import com.ca.bms.service.UserService;
-import com.ca.bms.utils.EncodeTools;
+import com.ca.bms.api.dao.SensorDao;
+import com.ca.bms.api.dao.UserDao;
+import com.ca.bms.api.service.UserService;
+import com.ca.bms.api.utils.EncodeTools;
+import com.ca.bms.common.entitys.SensorEntity;
+import com.ca.bms.common.entitys.UserEntity;
+import com.ca.bms.common.enumtype.SensorStatusEnum;
+import com.ca.bms.common.enumtype.UserStatusEnum;
 
 /**
  * @author：刘志龙

@@ -1,10 +1,10 @@
-package com.ca.bms.service;
+package com.ca.bms.api.service;
 
 import java.text.ParseException;
 import java.util.List;
 
-import com.ca.bms.entitys.SensorDataEntity;
-import com.ca.bms.enumtype.SensorDataStatusEnum;
+import com.ca.bms.common.entitys.SensorDataEntity;
+import com.ca.bms.common.enumtype.SensorDataStatusEnum;
 
 /**
  * @author：刘志龙

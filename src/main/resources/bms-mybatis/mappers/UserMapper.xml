@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ca.bms.dao.UserDao">
+<mapper namespace="com.ca.bms.api.dao.UserDao">
 
 	<resultMap id="UserResultMap" type="UserEntity">
 		<id column="ID" property="id" jdbcType="BIGINT" />
@@ -14,7 +14,7 @@
 		<result column="NICKNAME" property="nickname" jdbcType="VARCHAR" />
 		<result column="PHONE_NUM" property="phoneNum" jdbcType="VARCHAR" />
 		<result column="AUTH_NUM" property="authNum" jdbcType="INTEGER" />
-		<collection column="ID" property="sensorList" ofType="SensorEntity" select="com.ca.bms.dao.SensorDao.getSensorByUserId"/>
+		<collection column="ID" property="sensorList" ofType="SensorEntity" select="com.ca.bms.api.dao.SensorDao.getSensorByUserId"/>
 	</resultMap>
 
 	<insert id="saveUserByUser" parameterType="UserEntity"

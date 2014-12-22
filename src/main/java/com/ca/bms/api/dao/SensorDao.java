@@ -1,8 +1,8 @@
-package com.ca.bms.dao;
+package com.ca.bms.api.dao;
 
 import java.util.List;
 
-import com.ca.bms.entitys.SensorEntity;
+import com.ca.bms.common.entitys.SensorEntity;
 
 /**
  * 传感器dao

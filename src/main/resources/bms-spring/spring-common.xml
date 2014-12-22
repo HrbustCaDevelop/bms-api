@@ -18,9 +18,9 @@
 		init-method="init" destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url"
-			value="jdbc:mysql://222.27.196.234/buildingmonitor?useUnicode=true&amp;characterEncoding=utf-8" />
+			value="jdbc:mysql://localhost/buildingmonitor?useUnicode=true&amp;characterEncoding=utf-8" />
 		<property name="username" value="root" />
-		<property name="password" value="kismet" />
+		<property name="password" value="Liu588000" />
 		<property name="initialSize" value="3" />
 		<property name="minIdle" value="3" />
 		<property name="maxActive" value="20" />
@@ -51,7 +51,7 @@
 
 	<!-- 指定要扫描的dao以便自动注入 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.ca.bms.dao" />
+		<property name="basePackage" value="com.ca.bms.api.dao" />
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
 </beans>

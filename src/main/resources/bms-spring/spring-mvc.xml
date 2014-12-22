@@ -10,16 +10,16 @@
 	http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
 	<!-- 注解扫描包 -->
-	<context:component-scan base-package="com.ca.bms.controllers" />
-	<context:component-scan base-package="com.ca.bms.service" />
-	<context:component-scan base-package="com.ca.bms.entitys" />
+	<context:component-scan base-package="com.ca.bms.api.controllers" />
+	<context:component-scan base-package="com.ca.bms.api.service" />
+	<context:component-scan base-package="com.ca.bms.api.entitys" />
 
 	<!-- 开启注解 -->
 	<mvc:annotation-driven />
 	
 	<!-- 登陆拦截器 呵呵 -->
 	<mvc:interceptors>
-		<bean class="com.ca.bms.interceptor.SecurityInterceptor"></bean>
+		<bean class="com.ca.bms.api.interceptor.SecurityInterceptor"></bean>
 	</mvc:interceptors>
 
 	<!-- 多方法 -->
