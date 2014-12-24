@@ -178,7 +178,7 @@ public class SensorDataController {
 	@ResponseBody
 	@RequestMapping(value = "/alert/add", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	public Object alertAdd(
-			@RequestParam(value = "serialNum", required = true) String serialnum) {
+			@RequestParam(value = "serialnum", required = true) String serialnum) {
 		StringBuilder returnMsg = new StringBuilder("{\"returnmsg\":\"");
 		if (serialnum.trim().equals("")) {
 			returnMsg.append(SensorDataStatusEnum.PI.getValue());
