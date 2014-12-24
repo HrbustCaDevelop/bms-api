@@ -16,5 +16,6 @@
         <typeAlias type="com.ca.bms.common.entitys.UserEntity"/>
         <typeAlias type="com.ca.bms.common.entitys.SensorEntity"/>
         <typeAlias type="com.ca.bms.common.entitys.SensorDataEntity"/>
+        <typeAlias type="com.ca.bms.common.entitys.AlertMsgEntity"/>
     </typeAliases>
 </configuration>

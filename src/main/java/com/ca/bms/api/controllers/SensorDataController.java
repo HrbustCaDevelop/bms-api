@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SimplePropertyPreFilter;
 import com.ca.bms.api.annotation.AuthPass;
+import com.ca.bms.api.service.AlertMsgService;
 import com.ca.bms.api.service.SensorDataService;
+import com.ca.bms.common.entitys.AlertMsgEntity;
 import com.ca.bms.common.entitys.SensorDataEntity;
 import com.ca.bms.common.enumtype.SensorDataStatusEnum;
 
@@ -30,10 +32,14 @@ public class SensorDataController {
 	private static Logger logger = Logger.getLogger(SensorDataController.class);
 	private static SimplePropertyPreFilter sensorDataFilter = new SimplePropertyPreFilter(
 			SensorDataEntity.class, "createTime", "temperature", "humidity", "co", "smoke", "sensorAddr");
-	
+	private static SimplePropertyPreFilter AlertDataFilter = new SimplePropertyPreFilter(
+			AlertMsgEntity.class, "createTime");
 	@Autowired
 	SensorDataService sensorDataService;
 
+	@Autowired
+	AlertMsgService alertMsgService;
+	
 	/**
 	 * 添加一条传感器数据
 	 * 
@@ -160,6 +166,68 @@ public class SensorDataController {
 		regMsg.append("\",\"data\":");
 		regMsg.append(JSON.toJSONString(tempList, sensorDataFilter));
 		logger.info("返回一堆历史数据! :" + tempList.toString());
+		regMsg.append("}");
+		return regMsg.toString();
+	}
+	
+	/**
+	 * 保存警报信息
+	 * @param serialnum
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/alert/add", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+	public Object alertAdd(
+			@RequestParam(value = "serialNum", required = true) String serialnum) {
+		StringBuilder returnMsg = new StringBuilder("{\"returnmsg\":\"");
+		if (serialnum.trim().equals("")) {
+			returnMsg.append(SensorDataStatusEnum.PI.getValue());
+			returnMsg.append("\"}");
+			return returnMsg.toString();
+		}
+		AlertMsgEntity entity = new AlertMsgEntity();
+		entity.setSerialNum(serialnum);
+		returnMsg.append(alertMsgService.saveAlertMsg(entity)
+				.getValue());
+		returnMsg.append("\"}");
+		return returnMsg.toString();
+	}
+	
+	/**
+	 * 查询警报信息
+	 * @param serialnum
+	 * @return
+	 */
+	@AuthPass
+	@ResponseBody
+	@RequestMapping(value = "/alert/get", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+	public Object alertGet(
+			@RequestParam(value = "username", required = true) String username,
+			@RequestParam(value = "serialnum", required = true) String serialnum,
+			@RequestParam(value = "usertoken", required = true) String usertoken) {
+		StringBuilder regMsg = new StringBuilder("{\"returnmsg\":\"");
+		if (serialnum.trim().equals("")) {
+			regMsg.append(SensorDataStatusEnum.PI.getValue());
+			regMsg.append("\"}");
+			return regMsg.toString();
+		}
+		List<AlertMsgEntity> tempList;
+		try {
+			tempList = alertMsgService.getAlertMsg(serialnum);
+			if (null == tempList) {
+				regMsg.append(SensorDataStatusEnum.PI.getValue());
+				regMsg.append("\"}");
+				return regMsg.toString();
+			} else {
+				regMsg.append(SensorDataStatusEnum.DFS.getValue());
+			}
+		} catch (Exception e) {
+			regMsg.append(SensorDataStatusEnum.PI.getValue());
+			regMsg.append("\"}");
+			return regMsg.toString();
+		}
+		regMsg.append("\",\"data\":");
+		regMsg.append(JSON.toJSONString(tempList, AlertDataFilter));
 		regMsg.append("}");
 		return regMsg.toString();
 	}
