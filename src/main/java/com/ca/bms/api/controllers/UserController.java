@@ -218,6 +218,7 @@ public class UserController {
 			String password, String nickname, String phonenum) {
 		StringBuilder regMsg = new StringBuilder("{\"returnmsg\":\"");
 		UserEntity user = new UserEntity();
+		user.setUsername(username);
 		user.setNickname(nickname);
 		user.setPassword(password);
 		user.setPhoneNum(phonenum);
