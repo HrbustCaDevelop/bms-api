@@ -1,12 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.ca.bms</groupId>
-	<artifactId>api</artifactId>
+	<groupId>me.zhilong.bms</groupId>
+	<artifactId>bms-api</artifactId>
 	<packaging>war</packaging>
-	<version>1.0.1</version>
-	<name>api</name>
-	<url>http://maven.apache.org</url>
+	<version>2.0.1</version>
+	<name>bms-api</name>
+	<url>http://zhilong.me</url>
 
 	<properties>
 		<!-- 指定spring.version -->
