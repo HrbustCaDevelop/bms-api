@@ -19,6 +19,13 @@
 
 	<dependencies>
 
+		<!-- Memcached支持 -->
+		<dependency>
+			<groupId>com.whalin</groupId>
+			<artifactId>Memcached-Java-Client</artifactId>
+			<version>3.0.2</version>
+		</dependency>
+
 		<!-- Redis支持 -->
 		<dependency>
 			<groupId>redis.clients</groupId>
