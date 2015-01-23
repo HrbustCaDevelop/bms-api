@@ -23,9 +23,17 @@ public interface CacheTools {
 
 	/**
 	 * 存储键值对到缓存
-	 * 
+	 * 默认情况下20min超时
 	 * @param key
 	 * @param value
 	 */
 	public void put(String key, String value);
+	
+	/**
+	 * 存储键值对到缓存，并设置超时时间
+	 * @param key
+	 * @param value
+	 * @param sec 超时时间 单位：秒
+	*/
+	public void put(String key, String value, int sec);
 }
