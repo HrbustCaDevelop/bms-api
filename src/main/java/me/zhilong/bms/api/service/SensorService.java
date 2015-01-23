@@ -1,7 +1,7 @@
-package com.ca.bms.api.service;
+package me.zhilong.bms.api.service;
 
-import com.ca.bms.common.entitys.SensorEntity;
-import com.ca.bms.common.enumtype.SensorStatusEnum;
+import me.zhilong.bms.common.entitys.SensorEntity;
+import me.zhilong.bms.common.enumtype.SensorStatusEnum;
 
 /**
  * @author：刘志龙

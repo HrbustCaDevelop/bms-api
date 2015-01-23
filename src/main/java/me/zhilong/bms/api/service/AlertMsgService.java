@@ -1,9 +1,9 @@
-package com.ca.bms.api.service;
+package me.zhilong.bms.api.service;
 
 import java.util.List;
 
-import com.ca.bms.common.entitys.AlertMsgEntity;
-import com.ca.bms.common.enumtype.SensorDataStatusEnum;
+import me.zhilong.bms.common.entitys.AlertMsgEntity;
+import me.zhilong.bms.common.enumtype.SensorDataStatusEnum;
 
 /**
  * @author：刘志龙

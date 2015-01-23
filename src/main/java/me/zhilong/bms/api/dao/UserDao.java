@@ -1,6 +1,6 @@
-package com.ca.bms.api.dao;
+package me.zhilong.bms.api.dao;
 
-import com.ca.bms.common.entitys.UserEntity;
+import me.zhilong.bms.common.entitys.UserEntity;
 
 /**
  * 用户dao操作

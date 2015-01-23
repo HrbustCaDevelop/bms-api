@@ -1,15 +1,15 @@
-package com.ca.bms.api.service.impl;
+package me.zhilong.bms.api.service.impl;
 
 import java.util.List;
 
+import me.zhilong.bms.api.dao.AlertMsgDao;
+import me.zhilong.bms.api.dao.UserDao;
+import me.zhilong.bms.api.service.AlertMsgService;
+import me.zhilong.bms.common.entitys.AlertMsgEntity;
+import me.zhilong.bms.common.enumtype.SensorDataStatusEnum;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.ca.bms.api.dao.AlertMsgDao;
-import com.ca.bms.api.dao.UserDao;
-import com.ca.bms.api.service.AlertMsgService;
-import com.ca.bms.common.entitys.AlertMsgEntity;
-import com.ca.bms.common.enumtype.SensorDataStatusEnum;
 
 @Service("alertMsgService")
 public class AlertMsgServiceImpl implements AlertMsgService {

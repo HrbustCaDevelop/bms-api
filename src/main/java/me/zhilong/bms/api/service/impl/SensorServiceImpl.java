@@ -1,12 +1,12 @@
-package com.ca.bms.api.service.impl;
+package me.zhilong.bms.api.service.impl;
+
+import me.zhilong.bms.api.dao.SensorDao;
+import me.zhilong.bms.api.service.SensorService;
+import me.zhilong.bms.common.entitys.SensorEntity;
+import me.zhilong.bms.common.enumtype.SensorStatusEnum;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.ca.bms.api.dao.SensorDao;
-import com.ca.bms.api.service.SensorService;
-import com.ca.bms.common.entitys.SensorEntity;
-import com.ca.bms.common.enumtype.SensorStatusEnum;
 
 /**
  * @author：刘志龙

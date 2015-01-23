@@ -1,8 +1,17 @@
-package com.ca.bms.api.controllers;
+package me.zhilong.bms.api.controllers;
 
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
+import me.zhilong.bms.api.annotation.AuthPass;
+import me.zhilong.bms.api.service.UserService;
+import me.zhilong.bms.api.utils.EncodeTools;
+import me.zhilong.bms.api.utils.RedisUtils;
+import me.zhilong.bms.common.entitys.SensorEntity;
+import me.zhilong.bms.common.entitys.UserEntity;
+import me.zhilong.bms.common.enumtype.SensorDataStatusEnum;
+import me.zhilong.bms.common.enumtype.UserStatusEnum;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +23,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SimplePropertyPreFilter;
-import com.ca.bms.api.annotation.AuthPass;
-import com.ca.bms.api.service.UserService;
-import com.ca.bms.api.utils.EncodeTools;
-import com.ca.bms.api.utils.RedisUtils;
-import com.ca.bms.common.entitys.SensorEntity;
-import com.ca.bms.common.entitys.UserEntity;
-import com.ca.bms.common.enumtype.SensorDataStatusEnum;
-import com.ca.bms.common.enumtype.UserStatusEnum;
 
 /**
  * @author：刘志龙

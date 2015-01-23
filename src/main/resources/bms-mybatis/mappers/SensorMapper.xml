@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ca.bms.api.dao.SensorDao">
+<mapper namespace="me.zhilong.bms.api.dao.SensorDao">
 
 	<resultMap id="SensorResultMap" type="SensorEntity">
 		<id column="ID" property="id" jdbcType="BIGINT" />

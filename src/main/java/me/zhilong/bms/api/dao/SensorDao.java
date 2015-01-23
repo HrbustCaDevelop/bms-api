@@ -1,8 +1,8 @@
-package com.ca.bms.api.dao;
+package me.zhilong.bms.api.dao;
 
 import java.util.List;
 
-import com.ca.bms.common.entitys.SensorEntity;
+import me.zhilong.bms.common.entitys.SensorEntity;
 
 /**
  * 传感器dao

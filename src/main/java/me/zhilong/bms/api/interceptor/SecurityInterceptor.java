@@ -1,15 +1,15 @@
-package com.ca.bms.api.interceptor;
+package me.zhilong.bms.api.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import me.zhilong.bms.api.annotation.AuthPass;
+import me.zhilong.bms.api.utils.RedisUtils;
+import me.zhilong.bms.common.enumtype.UserStatusEnum;
+
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.ca.bms.api.annotation.AuthPass;
-import com.ca.bms.api.utils.RedisUtils;
-import com.ca.bms.common.enumtype.UserStatusEnum;
 
 /**
  * 登陆权限鉴定

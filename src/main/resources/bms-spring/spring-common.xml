@@ -51,7 +51,7 @@
 
 	<!-- 指定要扫描的dao以便自动注入 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.ca.bms.api.dao" />
+		<property name="basePackage" value="me.zhilong.bms.api.dao" />
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
 </beans>

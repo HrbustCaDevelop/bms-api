@@ -1,7 +1,14 @@
-package com.ca.bms.api.controllers;
+package me.zhilong.bms.api.controllers;
 
 import java.text.ParseException;
 import java.util.List;
+
+import me.zhilong.bms.api.annotation.AuthPass;
+import me.zhilong.bms.api.service.AlertMsgService;
+import me.zhilong.bms.api.service.SensorDataService;
+import me.zhilong.bms.common.entitys.AlertMsgEntity;
+import me.zhilong.bms.common.entitys.SensorDataEntity;
+import me.zhilong.bms.common.enumtype.SensorDataStatusEnum;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SimplePropertyPreFilter;
-import com.ca.bms.api.annotation.AuthPass;
-import com.ca.bms.api.service.AlertMsgService;
-import com.ca.bms.api.service.SensorDataService;
-import com.ca.bms.common.entitys.AlertMsgEntity;
-import com.ca.bms.common.entitys.SensorDataEntity;
-import com.ca.bms.common.enumtype.SensorDataStatusEnum;
 
 /**
  * @author：刘志龙

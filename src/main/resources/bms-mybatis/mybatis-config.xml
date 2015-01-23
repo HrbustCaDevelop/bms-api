@@ -13,9 +13,9 @@
     </settings>
     
     <typeAliases>
-        <typeAlias type="com.ca.bms.common.entitys.UserEntity"/>
-        <typeAlias type="com.ca.bms.common.entitys.SensorEntity"/>
-        <typeAlias type="com.ca.bms.common.entitys.SensorDataEntity"/>
-        <typeAlias type="com.ca.bms.common.entitys.AlertMsgEntity"/>
+        <typeAlias type="me.zhilong.bms.common.entitys.UserEntity"/>
+        <typeAlias type="me.zhilong.bms.common.entitys.SensorEntity"/>
+        <typeAlias type="me.zhilong.bms.common.entitys.SensorDataEntity"/>
+        <typeAlias type="me.zhilong.bms.common.entitys.AlertMsgEntity"/>
     </typeAliases>
 </configuration>

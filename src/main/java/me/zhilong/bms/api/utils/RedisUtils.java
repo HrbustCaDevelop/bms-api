@@ -1,4 +1,4 @@
-package com.ca.bms.api.utils;
+package me.zhilong.bms.api.utils;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;

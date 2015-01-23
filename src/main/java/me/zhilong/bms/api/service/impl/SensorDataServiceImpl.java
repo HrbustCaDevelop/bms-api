@@ -1,18 +1,18 @@
-package com.ca.bms.api.service.impl;
+package me.zhilong.bms.api.service.impl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import me.zhilong.bms.api.dao.SensorDataDao;
+import me.zhilong.bms.api.service.SensorDataService;
+import me.zhilong.bms.common.entitys.SensorDataEntity;
+import me.zhilong.bms.common.enumtype.SensorDataStatusEnum;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.ca.bms.api.dao.SensorDataDao;
-import com.ca.bms.api.service.SensorDataService;
-import com.ca.bms.common.entitys.SensorDataEntity;
-import com.ca.bms.common.enumtype.SensorDataStatusEnum;
 
 /**
  * @author：刘志龙

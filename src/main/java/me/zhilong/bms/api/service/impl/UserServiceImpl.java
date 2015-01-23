@@ -1,21 +1,21 @@
-package com.ca.bms.api.service.impl;
+package me.zhilong.bms.api.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import me.zhilong.bms.api.dao.SensorDao;
+import me.zhilong.bms.api.dao.UserDao;
+import me.zhilong.bms.api.service.UserService;
+import me.zhilong.bms.api.utils.EncodeTools;
+import me.zhilong.bms.common.entitys.SensorEntity;
+import me.zhilong.bms.common.entitys.UserEntity;
+import me.zhilong.bms.common.enumtype.SensorStatusEnum;
+import me.zhilong.bms.common.enumtype.UserStatusEnum;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.ca.bms.api.dao.SensorDao;
-import com.ca.bms.api.dao.UserDao;
-import com.ca.bms.api.service.UserService;
-import com.ca.bms.api.utils.EncodeTools;
-import com.ca.bms.common.entitys.SensorEntity;
-import com.ca.bms.common.entitys.UserEntity;
-import com.ca.bms.common.enumtype.SensorStatusEnum;
-import com.ca.bms.common.enumtype.UserStatusEnum;
 
 /**
  * @author：刘志龙
