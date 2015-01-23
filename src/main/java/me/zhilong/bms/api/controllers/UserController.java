@@ -6,8 +6,8 @@ import java.util.UUID;
 
 import me.zhilong.bms.api.annotation.AuthPass;
 import me.zhilong.bms.api.service.UserService;
+import me.zhilong.bms.api.utils.CacheTools;
 import me.zhilong.bms.api.utils.EncodeTools;
-import me.zhilong.bms.api.utils.RedisUtils;
 import me.zhilong.bms.common.entitys.SensorEntity;
 import me.zhilong.bms.common.entitys.UserEntity;
 import me.zhilong.bms.common.enumtype.SensorDataStatusEnum;
@@ -43,6 +43,9 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
+	@Autowired
+	CacheTools cacheTools;
+	
 	/**
 	 * 添加用户
 	 * 
@@ -107,7 +110,7 @@ public class UserController {
 			regMsg.append(UserStatusEnum.LS.getValue());
 			// 登陆成功授予一个Token，防止重复登陆，用于以后请求鉴权
 			String userToken = EncodeTools.MD5(UUID.randomUUID().toString());
-			RedisUtils.put(user.getUsername(), userToken);
+			cacheTools.put(user.getUsername(), userToken);
 			regMsg.append("\",\"usertoken\":\"" + userToken + "\"");
 			regMsg.append(",\"userdata\":"
 					+ JSON.toJSONString((UserEntity) returnMap.get("userdata"),
@@ -136,7 +139,7 @@ public class UserController {
 			@RequestParam(value = "username", required = true) String username,
 			@RequestParam(value = "usertoken", required = true) String usertoken) {
 		StringBuilder regMsg = new StringBuilder("{\"returnmsg\":\"");
-		RedisUtils.remove(username);
+		cacheTools.remove(username);
 		regMsg.append(UserStatusEnum.UILO.getValue());
 		regMsg.append("\"}");
 		logger.info("User Logout: " + username);

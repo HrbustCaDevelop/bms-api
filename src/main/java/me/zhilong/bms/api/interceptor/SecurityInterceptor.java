@@ -4,9 +4,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import me.zhilong.bms.api.annotation.AuthPass;
+import me.zhilong.bms.api.utils.CacheTools;
 import me.zhilong.bms.api.utils.RedisUtils;
 import me.zhilong.bms.common.enumtype.UserStatusEnum;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,6 +22,9 @@ import org.springframework.web.servlet.ModelAndView;
  */
 public class SecurityInterceptor implements HandlerInterceptor {
 
+	@Autowired
+	CacheTools cacheTools;
+	
 	@Override
 	public void afterCompletion(HttpServletRequest arg0,
 			HttpServletResponse arg1, Object arg2, Exception arg3)
@@ -48,7 +53,7 @@ public class SecurityInterceptor implements HandlerInterceptor {
 				Object username = request.getParameter("username");
 				Object usertoken = request.getParameter("usertoken");
 				if (username != null && usertoken != null) {
-					String jusertoken = RedisUtils.get(username.toString());
+					String jusertoken = cacheTools.get(username.toString());
 					if (usertoken.equals(jusertoken)) {
 						flag = true;
 					}

@@ -1,5 +1,7 @@
 package me.zhilong.bms.api.utils;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
@@ -7,25 +9,34 @@ import redis.clients.jedis.JedisPoolConfig;
 /**
  * @author：刘志龙
  * @since：2014年12月13日 下午4:56:34
- * @version:1.1
+ * @version:1.2
  */
-public class RedisUtils {
-	private static JedisPool pool;
-	static {
-		JedisPoolConfig config = new JedisPoolConfig();
+public class RedisUtils implements CacheTools {
+	@Value("#{configLoader['redis.maxidle']}")
+	private int maxidle;
+	@Value("#{configLoader['redis.ip']}")
+	private String ip;
+	@Value("#{configLoader['redis.port']}")
+	private int port;
+	@Value("#{configLoader['redis.timeout']}")
+	private int timeout;
+	@Value("#{configLoader['redis.password']}")
+	private String password;
 
-		config.setMaxIdle(200);
-		config.setTestOnBorrow(true);
-		config.setTestOnReturn(true);
-		pool = new JedisPool(config, "121.42.140.165", 12221, 2000, "Zj4xyBkgjd.");
-	}
+	private JedisPool pool;
 
 	/**
-	 * 删除缓存中的某个数据
-	 * 
-	 * @param key
-	 */
-	public static void remove(String key) {
+	 * 初始化Jedis Pool
+	*/
+	public void init() {
+		JedisPoolConfig config = new JedisPoolConfig();
+		config.setMaxIdle(maxidle);
+		config.setTestOnBorrow(true);
+		config.setTestOnReturn(true);
+		pool = new JedisPool(config, ip, port, timeout, password);
+	}
+
+	public void remove(String key) {
 		Jedis jedis = pool.getResource();
 		try {
 			jedis.del(key);
@@ -34,12 +45,7 @@ public class RedisUtils {
 		}
 	}
 
-	/**
-	 * 获取缓存中数据
-	 * 
-	 * @param key
-	 */
-	public static String get(String key) {
+	public String get(String key) {
 		Jedis jedis = pool.getResource();
 		try {
 			return jedis.get(key);
@@ -48,18 +54,52 @@ public class RedisUtils {
 		}
 	}
 
-	/**
-	 * 存储键值对到缓存
-	 * 
-	 * @param key
-	 * @param value
-	 */
-	public static void put(String key, String value) {
+	public void put(String key, String value) {
 		Jedis jedis = pool.getResource();
 		try {
 			jedis.set(key, value);
 		} finally {
 			pool.returnResource(jedis);
 		}
+	}
+
+	public int getMaxidle() {
+		return maxidle;
+	}
+
+	public void setMaxidle(int maxidle) {
+		this.maxidle = maxidle;
+	}
+
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
+	public int getPort() {
+		return port;
+	}
+
+	public void setPort(int port) {
+		this.port = port;
+	}
+
+	public int getTimeout() {
+		return timeout;
+	}
+
+	public void setTimeout(int timeout) {
+		this.timeout = timeout;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }
