@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 	http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -12,12 +13,12 @@
 	<!-- 注解扫描包 -->
 	<context:component-scan base-package="me.zhilong.bms.api.controllers" />
 	<context:component-scan base-package="me.zhilong.bms.api.service" />
-	<context:component-scan base-package="me.zhilong.bms.api.entitys" />
-
+	<context:component-scan base-package="me.zhilong.bms.api.utils" />
+	
 	<!-- 开启注解 -->
 	<mvc:annotation-driven />
 	
-	<!-- 登陆拦截器 呵呵 -->
+	<!-- 登陆拦截器 -->
 	<mvc:interceptors>
 		<bean class="me.zhilong.bms.api.interceptor.SecurityInterceptor"></bean>
 	</mvc:interceptors>

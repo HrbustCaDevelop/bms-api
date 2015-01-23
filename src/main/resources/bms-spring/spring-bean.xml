@@ -10,7 +10,11 @@
 	http://www.springframework.org/schema/tx
 	http://www.springframework.org/schema/tx/spring-tx.xsd">
 	
-	<!-- 使用Redis作为缓存数据库 -->
+	<!-- 兼容层，可以适配多种缓存环境，也可以同时使用 O(∩_∩)O~~ -->
+	
+	<!-- 使用Redis作为缓存 -->
 	<bean id="cacheTools" class="me.zhilong.bms.api.utils.RedisUtils" init-method="init" />
 	
+	<!-- 使用MemCached作为缓存 -->
+	<!-- <bean id="cacheTools" class="me.zhilong.bms.api.utils.MemcachedUtils" init-method="init" /> -->
 </beans>

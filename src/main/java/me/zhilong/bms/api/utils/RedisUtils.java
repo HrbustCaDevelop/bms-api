@@ -36,6 +36,7 @@ public class RedisUtils implements CacheTools {
 		pool = new JedisPool(config, ip, port, timeout, password);
 	}
 
+	@Override
 	public void remove(String key) {
 		Jedis jedis = pool.getResource();
 		try {
@@ -45,6 +46,7 @@ public class RedisUtils implements CacheTools {
 		}
 	}
 
+	@Override
 	public String get(String key) {
 		Jedis jedis = pool.getResource();
 		try {
@@ -54,15 +56,28 @@ public class RedisUtils implements CacheTools {
 		}
 	}
 
+	@Override
 	public void put(String key, String value) {
 		Jedis jedis = pool.getResource();
 		try {
 			jedis.set(key, value);
+			jedis.expire(key, 20 * 60);
 		} finally {
 			pool.returnResource(jedis);
 		}
 	}
 
+	@Override
+	public void put(String key, String value, int sec) {
+		Jedis jedis = pool.getResource();
+		try {
+			jedis.set(key, value);
+			jedis.expire(key, sec);
+		} finally {
+			pool.returnResource(jedis);
+		}
+	}
+	
 	public int getMaxidle() {
 		return maxidle;
 	}
