@@ -13,6 +13,8 @@
 		<spring.version>4.0.2.RELEASE</spring.version>
 		<!-- 指定mybatis.version -->
 		<mybatis.verison>3.2.5</mybatis.verison>
+		<!-- 指定编码集 -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<dependencies>
@@ -26,9 +28,9 @@
 
 		<!-- BMS-COMMON -->
 		<dependency>
-			<groupId>com.ca.bms</groupId>
-			<artifactId>common</artifactId>
-			<version>0.0.1</version>
+			<groupId>me.zhilong.bms</groupId>
+			<artifactId>bms-common</artifactId>
+			<version>1.0</version>
 		</dependency>
 
 		<!-- Mybatis begin -->
@@ -175,8 +177,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.5.1</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.6</source>
+					<target>1.6</target>
 					<showWarnings>true</showWarnings>
 					<encoding>utf-8</encoding>
 					<showDeprecation>true</showDeprecation>
