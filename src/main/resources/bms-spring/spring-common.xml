@@ -28,9 +28,9 @@
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		init-method="init" destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost/buildingmonitor?useUnicode=true&amp;characterEncoding=utf-8" />
-		<property name="username" value="root" />
-		<property name="password" value="Liu588000" />
+		<property name="url" value="jdbc:mysql://w.rdc.sae.sina.com.cn:3307/app_bmsapi?useUnicode=true&amp;characterEncoding=utf-8" />
+		<property name="username" value="y10jkz5ynk" />
+		<property name="password" value="y4iwj4z413zjy2k0zz31zmmykw0z12kwhzlwwxyx" />
 		<property name="initialSize" value="3" />
 		<property name="minIdle" value="3" />
 		<property name="maxActive" value="20" />
