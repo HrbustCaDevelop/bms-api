@@ -17,8 +17,24 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
-	<dependencies>
+	<repositories>
+		<!-- 定义项目中jar路径 -->
+		<repository>
+			<id>in-project</id>
+			<name>In Project Repo</name>
+			<url>file://${project.basedir}/lib</url>
+		</repository>
+	</repositories>
 
+	<dependencies>
+		
+		<!-- sae-sdk支持 -->
+		<dependency>
+			<groupId>com.sina.sae</groupId>
+			<artifactId>sae-local</artifactId>
+			<version>1.1.0</version>
+		</dependency>
+	
 		<!-- Memcached支持 -->
 		<dependency>
 			<groupId>com.whalin</groupId>
